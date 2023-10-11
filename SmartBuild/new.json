@@ -1,0 +1,20 @@
+[
+    {
+        "Estrutura": "Casa",
+        "Nome": "new",
+        "Medida": "Metros",
+        "Largura": "200",
+        "Comprimento": "200",
+        "Informacoes": "red",
+        "Objetos": [
+            {
+                "nome": "Triangulo-1",
+                "x": 0.0,
+                "y": 200.0,
+                "width": 200.0,
+                "height": 200.0,
+                "color": "red"
+            }
+        ]
+    }
+]

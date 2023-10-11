@@ -1,0 +1,98 @@
+{
+    "Estrutura": "Casa",
+    "Nome": "new",
+    "Medida": "Metros",
+    "Largura": "200",
+    "Comprimento": "200",
+    "Informacoes": "red",
+    "Objetos": [
+        {
+            "nome": "Quadrado-1",
+            "x": 378.0,
+            "y": 238.0,
+            "width": 200.0,
+            "height": 200.0,
+            "color": "red"
+        },
+        {
+            "nome": "Quadrado-2",
+            "x": 885.5429485256551,
+            "y": 116.22489082810219,
+            "width": 200.0,
+            "height": 200.0,
+            "color": "yellow"
+        },
+        {
+            "nome": "Triangulo-1",
+            "x": -831.0,
+            "y": 1174.0,
+            "width": 200.0,
+            "height": 200.0,
+            "color": "red"
+        },
+        {
+            "nome": "Circulo-1",
+            "x": 432.0807735471901,
+            "y": 122.04755659343907,
+            "width": 200.0,
+            "height": 200.0,
+            "color": "red"
+        },
+        {
+            "nome": "Circulo-2",
+            "x": 358.997337701479,
+            "y": 164.82475849325084,
+            "width": 500.0,
+            "height": 500.0,
+            "color": "#242424"
+        },
+        {
+            "nome": "Circulo-3",
+            "x": 486.2984490517881,
+            "y": 174.21352074998657,
+            "width": 200.0,
+            "height": 200.0,
+            "color": "red"
+        },
+        {
+            "nome": "Linha-1",
+            "x": 489.0,
+            "y": 132.0,
+            "x2": 132.0,
+            "width": 1,
+            "color": "black"
+        },
+        {
+            "nome": "Linha-2",
+            "x": 628.0,
+            "y": 197.0,
+            "x2": 197.0,
+            "width": 1,
+            "color": "black"
+        },
+        {
+            "nome": "Linha-3",
+            "x": 269.0,
+            "y": 173.0,
+            "x2": 173.0,
+            "width": 1,
+            "color": "black"
+        },
+        {
+            "nome": "Linha-4",
+            "x": 100.0,
+            "y": 100.0,
+            "x2": 100.0,
+            "width": 1,
+            "color": "black"
+        },
+        {
+            "nome": "Linha-5",
+            "x": 100.0,
+            "y": 100.0,
+            "x2": 100.0,
+            "width": 1,
+            "color": "black"
+        }
+    ]
+}

@@ -1,0 +1,33 @@
+{
+    "Estrutura": "Casa",
+    "Nome": "novo(2)",
+    "Medida": "Metros",
+    "Largura": "200",
+    "Comprimento": "200",
+    "Informacoes": "red",
+    "Objetos": [
+        {
+            "nome": "Triangulo-1",
+            "x": 0.0,
+            "y": 200.0,
+            "width": 200.0,
+            "height": 200.0,
+            "color": "red"
+        },
+        {
+            "nome": "Linha-1",
+            "x": 100.0,
+            "y": 100.0,
+            "width": 1,
+            "color": "black"
+        },
+        {
+            "nome": "Quadrado-1",
+            "x": 100.0,
+            "y": 100.0,
+            "width": 300.0,
+            "height": 300.0,
+            "color": "red"
+        }
+    ]
+}

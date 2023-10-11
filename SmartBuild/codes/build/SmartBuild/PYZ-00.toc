@@ -1,0 +1,1552 @@
+button_entrar.place(x=647, y=70)
+
+        button_deletar = tk.Button(projetos_frame, text="excluir", font=font_bold, bg="#991010", fg="white", highlightthickness=1, highlightcolor="white", activebackground="white", relief="ridge", command=lambda proj=projeto_obj: excluir_projeto(proj) )
+        button_deletar.place(x=590, y=70)
+
+        picture_img.place(x=15, y=15)
+        id_label.place(x=600, y=12)
+        nome_label.place(x=100, y=12)
+        tipo_estrutura_label.place(x=100, y=40)
+        tipo_medida_label.place(x=600, y=35)
+        descricao_label.place(x=100, y=68)
+        descricao_label_event.place(x=225, y=67)
+
+        y_position += 110
+
+projetos_do_usuario = buscar_projetos_por_usuario(username)
+
+if projetos_do_usuario:
+    print(f"Projetos de {username}:")
+    exibir_projetos_na_tela(projetos_do_usuario)
+else:
+    print(f"Usu√°rio {username} n√£o possui projetos.")
+
+#ao abrir projeto destroi tela user
+def open_project():
+    userwin.destroy()
+    time.sleep(0.5)
+    from software import softwin
+
+#cria novo projeto    
+def create_new_project():   
+    global frame_newProject_isopen
+    if frame_newProject_isopen == 1:
+        return
+    else:
+        style = ThemedStyle(userwin)
+        style.set_theme("clam")
+
+        estruturas = ["Casa", "Sobrado", "Apartamento", "Com√©rcio", "SuperMercado", "Customizado"]
+        medidas = ["Metros", "P√©s"]
+
+        def on_estrutura_selection(event):
+            global custom_estrutura
+            global selecionado_estrutura
+
+            selected_estrutura = tipo_estrutura_lista.get()
+
+            if selected_estrutura == "Customizado":
+                custom_estrutura_lbl = customtkinter.CTkLabel(master=newProjectbtn_frame, text="Estrutura personalizada:")
+                custom_estrutura_lbl.place(x=251, y=135)
+                custom_estrutura = customtkinter.CTkEntry(master=newProjectbtn_frame, width=190, height=28, corner_radius=3 ,placeholder_text="Digite aqui")
+                custom_estrutura.place(x=250, y=160)
+                print("Estrutura selecionada:", selected_estrutura)
+                selecionado_estrutura += 1
+
+            if selected_estrutura == "Casa" or selected_estrutura == "Sobrado" or selected_estrutura == "Apartamento" or selected_estrutura == "Com√©rcio" or selected_estrutura == "SuperMercado":
+                print("Estrutura selecionada:", selected_estrutura)
+                if selecionado_estrutura == 1:
+                    custom_estrutura.place_forget()
+                    selecionado_estrutura -= 1
+        
+        def on_medida_selection(event):
+            medida = medida_list.get()
+            print("Tipo de medida selecionado: ", medida)
+
+        def scroll_canvas(event):
+            canvas.yview_scroll(-1 * (event.delta // 120), "units")
+
+        def newProjectbtn_frame_close():
+            global frame_newProject_isopen
+            canvas.unbind("<MouseWheel>")
+            newProjectbtn_frame.unbind("<MouseWheel>")
+            scrollbar.destroy()
+            canvas.destroy()
+            atualizar_lista_projetos()
+            frame_newProject_isopen -= 1
+
+        canvas = tk.Canvas(userwin, bg="#242424", width=720, height=480, highlightthickness=0)
+        canvas.place(x=200, y=0)
+
+        scrollbar = ttk.Scrollbar(userwin, orient=tk.VERTICAL, command=canvas.yview)
+        scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+        style.configure("TScrollbar", troughcolor="#242424", background="#F47D29", gripcount=0 )
+
+        canvas.configure(yscrollcommand=scrollbar.set)
+        canvas.bind("<Configure>", lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
+        canvas.bind("<MouseWheel>", scroll_canvas)
+
+        newProjectbtn_frame = customtkinter.CTkFrame(master=canvas, width=720, height=700, corner_radius=0, fg_color="#242424")
+        canvas.create_window((0, 0), window=newProjectbtn_frame, anchor=tk.NW)
+        newProjectbtn_frame.bind("<MouseWheel>", scroll_canvas)
+
+        criando = customtkinter.CTkLabel(master=newProjectbtn_frame, \Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\ImageCms.py',
+   'PYMODULE'),
+  ('PIL.ImageColor',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\ImageColor.py',
+   'PYMODULE'),
+  ('PIL.ImageFile',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\ImageFile.py',
+   'PYMODULE'),
+  ('PIL.ImageFilter',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\ImageFilter.py',
+   'PYMODULE'),
+  ('PIL.ImageMode',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\ImageMode.py',
+   'PYMODULE'),
+  ('PIL.ImageOps',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\ImageOps.py',
+   'PYMODULE'),
+  ('PIL.ImagePalette',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\ImagePalette.py',
+   'PYMODULE'),
+  ('PIL.ImageQt',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\ImageQt.py',
+   'PYMODULE'),
+  ('PIL.ImageSequence',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\ImageSequence.py',
+   'PYMODULE'),
+  ('PIL.ImageShow',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\ImageShow.py',
+   'PYMODULE'),
+  ('PIL.ImageTk',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\ImageTk.py',
+   'PYMODULE'),
+  ('PIL.ImageWin',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\ImageWin.py',
+   'PYMODULE'),
+  ('PIL.ImtImagePlugin',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\ImtImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.IptcImagePlugin',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\IptcImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.Jpeg2KImagePlugin',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\Jpeg2KImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.JpegImagePlugin',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\JpegImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.JpegPresets',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\JpegPresets.py',
+   'PYMODULE'),
+  ('PIL.McIdasImagePlugin',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\McIdasImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.MicImagePlugin',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\MicImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.MpegImagePlugin',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\MpegImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.MpoImagePlugin',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\MpoImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.MspImagePlugin',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\MspImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.PaletteFile',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\PaletteFile.py',
+   'PYMODULE'),
+  ('PIL.PalmImagePlugin',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\PalmImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.PcdImagePlugin',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\PcdImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.PcxImagePlugin',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\PcxImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.PdfImagePlugin',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\PdfImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.PdfParser',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\PdfParser.py',
+   'PYMODULE'),
+  ('PIL.PixarImagePlugin',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\PixarImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.PngImagePlugin',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\PngImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.PpmImagePlugin',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\PpmImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.PsdImagePlugin',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\PsdImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.PyAccess',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\PyAccess.py',
+   'PYMODULE'),
+  ('PIL.QoiImagePlugin',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\QoiImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.SgiImagePlugin',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\SgiImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.SpiderImagePlugin',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\SpiderImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.SunImagePlugin',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\SunImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.TgaImagePlugin',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\TgaImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.TiffImagePlugin',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\TiffImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.TiffTags',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\TiffTags.py',
+   'PYMODULE'),
+  ('PIL.WebPImagePlugin',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\WebPImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.WmfImagePlugin',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\WmfImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.XVThumbImagePlugin',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\XVThumbImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.XbmImagePlugin',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\XbmImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.XpmImagePlugin',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\XpmImagePlugin.py',
+   'PYMODULE'),
+  ('PIL._binary',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\_binary.py',
+   'PYMODULE'),
+  ('PIL._deprecate',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\_deprecate.py',
+   'PYMODULE'),
+  ('PIL._util',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\_util.py',
+   'PYMODULE'),
+  ('PIL._version',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\_version.py',
+   'PYMODULE'),
+  ('PIL.features',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\PIL\\features.py',
+   'PYMODULE'),
+  ('__future__',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\__future__.py',
+   'PYMODULE'),
+  ('_aix_support',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\_aix_support.py',
+   'PYMODULE'),
+  ('_bootsubprocess',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\_bootsubprocess.py',
+   'PYMODULE'),
+  ('_compat_pickle',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\_compat_pickle.py',
+   'PYMODULE'),
+  ('_compression',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\_compression.py',
+   'PYMODULE'),
+  ('_distutils_hack',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\_distutils_hack\\__init__.py',
+   'PYMODULE'),
+  ('_distutils_hack.override',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\_distutils_hack\\override.py',
+   'PYMODULE'),
+  ('_osx_support',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\_osx_support.py',
+   'PYMODULE'),
+  ('_py_abc',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\_py_abc.py',
+   'PYMODULE'),
+  ('_pydecimal',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\_pydecimal.py',
+   'PYMODULE'),
+  ('_sitebuiltins',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\_sitebuiltins.py',
+   'PYMODULE'),
+  ('_strptime',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\_strptime.py',
+   'PYMODULE'),
+  ('_threading_local',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\_threading_local.py',
+   'PYMODULE'),
+  ('argparse',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\argparse.py',
+   'PYMODULE'),
+  ('ast',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\ast.py',
+   'PYMODULE'),
+  ('asyncio',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\__init__.py',
+   'PYMODULE'),
+  ('asyncio.base_events',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\base_events.py',
+   'PYMODULE'),
+  ('asyncio.base_futures',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\base_futures.py',
+   'PYMODULE'),
+  ('asyncio.base_subprocess',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\base_subprocess.py',
+   'PYMODULE'),
+  ('asyncio.base_tasks',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\base_tasks.py',
+   'PYMODULE'),
+  ('asyncio.constants',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\constants.py',
+   'PYMODULE'),
+  ('asyncio.coroutines',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\coroutines.py',
+   'PYMODULE'),
+  ('asyncio.events',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\events.py',
+   'PYMODULE'),
+  ('asyncio.exceptions',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\exceptions.py',
+   'PYMODULE'),
+  ('asyncio.format_helpers',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\format_helpers.py',
+   'PYMODULE'),
+  ('asyncio.futures',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\futures.py',
+   'PYMODULE'),
+  ('asyncio.locks',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\locks.py',
+   'PYMODULE'),
+  ('asyncio.log',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\log.py',
+   'PYMODULE'),
+  ('asyncio.mixins',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\mixins.py',
+   'PYMODULE'),
+  ('asyncio.proactor_events',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\proactor_events.py',
+   'PYMODULE'),
+  ('asyncio.protocols',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\protocols.py',
+   'PYMODULE'),
+  ('asyncio.queues',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\queues.py',
+   'PYMODULE'),
+  ('asyncio.runners',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\runners.py',
+   'PYMODULE'),
+  ('asyncio.selector_events',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\selector_events.py',
+   'PYMODULE'),
+  ('asyncio.sslproto',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\sslproto.py',
+   'PYMODULE'),
+  ('asyncio.staggered',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\staggered.py',
+   'PYMODULE'),
+  ('asyncio.streams',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\streams.py',
+   'PYMODULE'),
+  ('asyncio.subprocess',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\subprocess.py',
+   'PYMODULE'),
+  ('asyncio.taskgroups',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\taskgroups.py',
+   'PYMODULE'),
+  ('asyncio.tasks',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\tasks.py',
+   'PYMODULE'),
+  ('asyncio.threads',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\threads.py',
+   'PYMODULE'),
+  ('asyncio.timeouts',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\timeouts.py',
+   'PYMODULE'),
+  ('asyncio.transports',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\transports.py',
+   'PYMODULE'),
+  ('asyncio.trsock',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\trsock.py',
+   'PYMODULE'),
+  ('asyncio.unix_events',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\unix_events.py',
+   'PYMODULE'),
+  ('asyncio.windows_events',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\windows_events.py',
+   'PYMODULE'),
+  ('asyncio.windows_utils',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\asyncio\\windows_utils.py',
+   'PYMODULE'),
+  ('base64',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\base64.py',
+   'PYMODULE'),
+  ('bisect',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\bisect.py',
+   'PYMODULE'),
+  ('bz2',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\bz2.py',
+   'PYMODULE'),
+  ('calendar',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\calendar.py',
+   'PYMODULE'),
+  ('cgi',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\cgi.py',
+   'PYMODULE'),
+  ('colorsys',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\colorsys.py',
+   'PYMODULE'),
+  ('concurrent',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\concurrent\\__init__.py',
+   'PYMODULE'),
+  ('concurrent.futures',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\concurrent\\futures\\__init__.py',
+   'PYMODULE'),
+  ('concurrent.futures._base',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\concurrent\\futures\\_base.py',
+   'PYMODULE'),
+  ('concurrent.futures.process',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\concurrent\\futures\\process.py',
+   'PYMODULE'),
+  ('concurrent.futures.thread',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\concurrent\\futures\\thread.py',
+   'PYMODULE'),
+  ('configparser',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\configparser.py',
+   'PYMODULE'),
+  ('contextlib',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\contextlib.py',
+   'PYMODULE'),
+  ('contextvars',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\contextvars.py',
+   'PYMODULE'),
+  ('copy',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\copy.py',
+   'PYMODULE'),
+  ('csv',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\csv.py',
+   'PYMODULE'),
+  ('ctypes',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\ctypes\\__init__.py',
+   'PYMODULE'),
+  ('ctypes._aix',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\ctypes\\_aix.py',
+   'PYMODULE'),
+  ('ctypes._endian',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\ctypes\\_endian.py',
+   'PYMODULE'),
+  ('ctypes.macholib',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\ctypes\\macholib\\__init__.py',
+   'PYMODULE'),
+  ('ctypes.macholib.dyld',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\ctypes\\macholib\\dyld.py',
+   'PYMODULE'),
+  ('ctypes.macholib.dylib',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\ctypes\\macholib\\dylib.py',
+   'PYMODULE'),
+  ('ctypes.macholib.framework',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\ctypes\\macholib\\framework.py',
+   'PYMODULE'),
+  ('ctypes.util',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\ctypes\\util.py',
+   'PYMODULE'),
+  ('ctypes.wintypes',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\ctypes\\wintypes.py',
+   'PYMODULE'),
+  ('customtkinter',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\__init__.py',
+   'PYMODULE'),
+  ('customtkinter.windows',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\__init__.py',
+   'PYMODULE'),
+  ('customtkinter.windows.ctk_input_dialog',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\ctk_input_dialog.py',
+   'PYMODULE'),
+  ('customtkinter.windows.ctk_tk',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\ctk_tk.py',
+   'PYMODULE'),
+  ('customtkinter.windows.ctk_toplevel',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\ctk_toplevel.py',
+   'PYMODULE'),
+  ('customtkinter.windows.widgets',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\widgets\\__init__.py',
+   'PYMODULE'),
+  ('customtkinter.windows.widgets.appearance_mode',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\widgets\\appearance_mode\\__init__.py',
+   'PYMODULE'),
+  ('customtkinter.windows.widgets.appearance_mode.appearance_mode_base_class',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\widgets\\appearance_mode\\appearance_mode_base_class.py',
+   'PYMODULE'),
+  ('customtkinter.windows.widgets.appearance_mode.appearance_mode_tracker',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\widgets\\appearance_mode\\appearance_mode_tracker.py',
+   'PYMODULE'),
+  ('customtkinter.windows.widgets.core_rendering',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\widgets\\core_rendering\\__init__.py',
+   'PYMODULE'),
+  ('customtkinter.windows.widgets.core_rendering.ctk_canvas',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\widgets\\core_rendering\\ctk_canvas.py',
+   'PYMODULE'),
+  ('customtkinter.windows.widgets.core_rendering.draw_engine',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\widgets\\core_rendering\\draw_engine.py',
+   'PYMODULE'),
+  ('customtkinter.windows.widgets.core_widget_classes',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\widgets\\core_widget_classes\\__init__.py',
+   'PYMODULE'),
+  ('customtkinter.windows.widgets.core_widget_classes.ctk_base_class',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\widgets\\core_widget_classes\\ctk_base_class.py',
+   'PYMODULE'),
+  ('customtkinter.windows.widgets.core_widget_classes.dropdown_menu',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\widgets\\core_widget_classes\\dropdown_menu.py',
+   'PYMODULE'),
+  ('customtkinter.windows.widgets.ctk_button',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\widgets\\ctk_button.py',
+   'PYMODULE'),
+  ('customtkinter.windows.widgets.ctk_checkbox',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\widgets\\ctk_checkbox.py',
+   'PYMODULE'),
+  ('customtkinter.windows.widgets.ctk_combobox',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\widgets\\ctk_combobox.py',
+   'PYMODULE'),
+  ('customtkinter.windows.widgets.ctk_entry',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\widgets\\ctk_entry.py',
+   'PYMODULE'),
+  ('customtkinter.windows.widgets.ctk_frame',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\widgets\\ctk_frame.py',
+   'PYMODULE'),
+  ('customtkinter.windows.widgets.ctk_label',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\widgets\\ctk_label.py',
+   'PYMODULE'),
+  ('customtkinter.windows.widgets.ctk_optionmenu',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\widgets\\ctk_optionmenu.py',
+   'PYMODULE'),
+  ('customtkinter.windows.widgets.ctk_progressbar',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\widgets\\ctk_progressbar.py',
+   'PYMODULE'),
+  ('customtkinter.windows.widgets.ctk_radiobutton',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\widgets\\ctk_radiobutton.py',
+   'PYMODULE'),
+  ('customtkinter.windows.widgets.ctk_scrollable_frame',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\widgets\\ctk_scrollable_frame.py',
+   'PYMODULE'),
+  ('customtkinter.windows.widgets.ctk_scrollbar',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\widgets\\ctk_scrollbar.py',
+   'PYMODULE'),
+  ('customtkinter.windows.widgets.ctk_segmented_button',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\widgets\\ctk_segmented_button.py',
+   'PYMODULE'),
+  ('customtkinter.windows.widgets.ctk_slider',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\widgets\\ctk_slider.py',
+   'PYMODULE'),
+  ('customtkinter.windows.widgets.ctk_switch',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\widgets\\ctk_switch.py',
+   'PYMODULE'),
+  ('customtkinter.windows.widgets.ctk_tabview',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\widgets\\ctk_tabview.py',
+   'PYMODULE'),
+  ('customtkinter.windows.widgets.ctk_textbox',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\widgets\\ctk_textbox.py',
+   'PYMODULE'),
+  ('customtkinter.windows.widgets.font',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\widgets\\font\\__init__.py',
+   'PYMODULE'),
+  ('customtkinter.windows.widgets.font.ctk_font',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\widgets\\font\\ctk_font.py',
+   'PYMODULE'),
+  ('customtkinter.windows.widgets.font.font_manager',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\widgets\\font\\font_manager.py',
+   'PYMODULE'),
+  ('customtkinter.windows.widgets.image',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\widgets\\image\\__init__.py',
+   'PYMODULE'),
+  ('customtkinter.windows.widgets.image.ctk_image',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\widgets\\image\\ctk_image.py',
+   'PYMODULE'),
+  ('customtkinter.windows.widgets.scaling',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\widgets\\scaling\\__init__.py',
+   'PYMODULE'),
+  ('customtkinter.windows.widgets.scaling.scaling_base_class',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\widgets\\scaling\\scaling_base_class.py',
+   'PYMODULE'),
+  ('customtkinter.windows.widgets.scaling.scaling_tracker',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\widgets\\scaling\\scaling_tracker.py',
+   'PYMODULE'),
+  ('customtkinter.windows.widgets.theme',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\widgets\\theme\\__init__.py',
+   'PYMODULE'),
+  ('customtkinter.windows.widgets.theme.theme_manager',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\widgets\\theme\\theme_manager.py',
+   'PYMODULE'),
+  ('customtkinter.windows.widgets.utility',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\widgets\\utility\\__init__.py',
+   'PYMODULE'),
+  ('customtkinter.windows.widgets.utility.utility_functions',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\customtkinter\\windows\\widgets\\utility\\utility_functions.py',
+   'PYMODULE'),
+  ('darkdetect',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\darkdetect\\__init__.py',
+   'PYMODULE'),
+  ('darkdetect._dummy',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\darkdetect\\_dummy.py',
+   'PYMODULE'),
+  ('darkdetect._linux_detect',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\darkdetect\\_linux_detect.py',
+   'PYMODULE'),
+  ('darkdetect._mac_detect',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\darkdetect\\_mac_detect.py',
+   'PYMODULE'),
+  ('darkdetect._windows_detect',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\darkdetect\\_windows_detect.py',
+   'PYMODULE'),
+  ('dataclasses',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\dataclasses.py',
+   'PYMODULE'),
+  ('datetime',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\datetime.py',
+   'PYMODULE'),
+  ('decimal',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\decimal.py',
+   'PYMODULE'),
+  ('difflib',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\difflib.py',
+   'PYMODULE'),
+  ('dis',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\dis.py',
+   'PYMODULE'),
+  ('distutils',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\distutils\\__init__.py',
+   'PYMODULE'),
+  ('distutils._msvccompiler',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\distutils\\_msvccompiler.py',
+   'PYMODULE'),
+  ('distutils.archive_util',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\distutils\\archive_util.py',
+   'PYMODULE'),
+  ('distutils.ccompiler',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\distutils\\ccompiler.py',
+   'PYMODULE'),
+  ('distutils.cmd',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\distutils\\cmd.py',
+   'PYMODULE'),
+  ('distutils.command',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\distutils\\command\\__init__.py',
+   'PYMODULE'),
+  ('distutils.command.bdist',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\distutils\\command\\bdist.py',
+   'PYMODULE'),
+  ('distutils.command.build',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\distutils\\command\\build.py',
+   'PYMODULE'),
+  ('distutils.command.build_ext',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\distutils\\command\\build_ext.py',
+   'PYMODULE'),
+  ('distutils.command.sdist',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\distutils\\command\\sdist.py',
+   'PYMODULE'),
+  ('distutils.config',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\distutils\\config.py',
+   'PYMODULE'),
+  ('distutils.core',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\distutils\\core.py',
+   'PYMODULE'),
+  ('distutils.debug',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\distutils\\debug.py',
+   'PYMODULE'),
+  ('distutils.dep_util',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\distutils\\dep_util.py',
+   'PYMODULE'),
+  ('distutils.dir_util',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\distutils\\dir_util.py',
+   'PYMODULE'),
+  ('distutils.dist',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\distutils\\dist.py',
+   'PYMODULE'),
+  ('distutils.errors',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\distutils\\errors.py',
+   'PYMODULE'),
+  ('distutils.extension',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\distutils\\extension.py',
+   'PYMODULE'),
+  ('distutils.fancy_getopt',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\distutils\\fancy_getopt.py',
+   'PYMODULE'),
+  ('distutils.file_util',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\distutils\\file_util.py',
+   'PYMODULE'),
+  ('distutils.filelist',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\distutils\\filelist.py',
+   'PYMODULE'),
+  ('distutils.log',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\distutils\\log.py',
+   'PYMODULE'),
+  ('distutils.msvc9compiler',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\distutils\\msvc9compiler.py',
+   'PYMODULE'),
+  ('distutils.spawn',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\distutils\\spawn.py',
+   'PYMODULE'),
+  ('distutils.sysconfig',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\distutils\\sysconfig.py',
+   'PYMODULE'),
+  ('distutils.text_file',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\distutils\\text_file.py',
+   'PYMODULE'),
+  ('distutils.util',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\distutils\\util.py',
+   'PYMODULE'),
+  ('distutils.version',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\distutils\\version.py',
+   'PYMODULE'),
+  ('distutils.versionpredicate',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\distutils\\versionpredicate.py',
+   'PYMODULE'),
+  ('email',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\email\\__init__.py',
+   'PYMODULE'),
+  ('email._encoded_words',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\gmaA}\\W°ncodedVorÌo.p‰+,z2  >RYMOULµQ),  n+em`yl.iea4Ωr_z{lu]_par1er/|
+o¬ 'S>\\›ˆerÂd\UN~√°~Io\‹CppetaIXfncaøl\Pf¡grh·s\FytXon\º’ytÀn32æ\\E¬b\5‡maC¯\\RËea|Pr_lu'\pa˙`eräòy'¸S
+ rã'PâD.\E'¡d
+%Z('A-aiÏÃ_pcbse#\dr7F
+Ó  '≤.\\}`erY|\UQ|√°QLo\pp Rta‹pLokËd\\Prohöamq
+\PIÌho.M\Pktho 11VULiaû\eç il¶x_pase∑dr>Ly'˝
+ "‘'PïÈODTLE'kŒ
+Ò('…ˇqiˆj_plficyLasc&(($  %r:\teÛe{¯\|?ëuÀ%k∏oµÙep3ºivD|≠}˜MdDZ§/ÀpCm2.\ACDhE/√}X˚~7M`µ`Ñò$Ï…7}•Ãae›TML|.™‚!h‚Èha*2¬ÑïÉ•"j\YMDTUù◊©Ã> £h7wËL9ZF√˝K68=qq+&‹ˇa2$Ô˙@lUÚgäBiY]uoTÅvÏntL…ÚvauÛu,D`ßp'hYPn#rU|;Ê\”xhÎGúeByt)ün3®\\H)b\zimaÈo\\%Îse∂6miÃ≠.ˇ$,%¨  û8YMnDULE),}
+  ãfeoal.QCarsbt'¨û
+ 	p'C8Ó\U3‰rsL|Us—B°rmÎ\\¡GpD£xa\sÃoc£n\\⁄ogX·mqnpPyv˝onË‹PiÚJon∂11\Ktibp^em+@l\tohasset-Êy',
+ )ª'PŸODUﬂE' 
+ Ç('üeaiÃéco¨Ten1·anqfer'$
+·> 'P#\\ÛezPŸ\U|ÿ√°k_o\¿£pp%taJƒLo˜`l\8Proo“amqE\P-§homú\Py§ho«111ù\Lil,\eI!il4VcoÆœen˚·an˜Ger(`y' 
+ Å'PëOD@QE'+l
+#¿('≈kai|jen+hdesÛ',
+  †}B:JUs•psL\qu«1rhK∏\–∏-DAA\\F¨ka`8\¿rgr°a[Msyx»°xUÃ·U9-*≤ q=ú_cÃïwmiLî1ñ#w¥§M˝z|(eÄ‰HÕ”qèMOóïLEdÖ,†g (gomai,.ey8orÛ',Fh  f!:\MUse\\C1u√¨„ioyòApu‘atag\Lo&al\zPreora,Q\\E{thEØ\\9thÁ>31e,\L®F\\g]ai÷\e∑ˆor_pyß(
+¨  '¥yMOÄULE<°,	È (¢Hma≠ﬁ.fcIdp0seó#,Êh  ö[:\>tse0I\\Øsu√)êio0Ap{Matˆ¸\L<cal≥ÊPrgra.S\\∞rdh_h\\xkth˛u310j\Li#\\eiai<]\f(jdpE„seêÓpy
+¨ ' ÈMODöLE#©,ˇ (ßgmakl.gÂ©er}vorE
+™! 'Kù\\üeríP\Ujo√°ÛIo\)ËppjŸta\ºLo0`l\uC2ow#amq^\PÌªho`°\Pµhgj0119uLiE\e™¿ÈlTîgeËmreqrõ2<< Ç√¸ÔTUÙ/)¶¯
+`∏p‹mÈ˝1å’Q>K5v,ª'!cﬁñ ≈q%˙“_¯]ƒ8ScOÙ{pdÜ ˆ}|Ñ^|cﬂ…~lmegòj)£E∫Qypl|zd\SÑ–~7Ùÿs´~y	Öc«kD@|`Ma\mvoFx.T ëª&zL]qOB#)]P 01mbsn• gETÚW"ﬂ·?{ry'î*
+ åj'C(\\U≈rsV1Us](°ray\\C–pDËta\W^ocau\\≤ogrAms^PPyz(onV¿Pyyjon;41\ÿLibûúemaÒl\R®ea°Grro'isw“y.Fw',)P  ∂ØPY¡ODU◊%') ç
+ ≤'e-£ilbmte µto!^',≠
+$ #¡C:úNUs˜Fs\ su„˜rin∆\ApDaZ3\\»caÑƒ\PrÓgrÕÓs\IyytR/j\‹zyth/n3p^\\fkb\TmmaË»\\Ÿher˘ÙorQ!py•
+)ù 'b)MOƒaLE',I… (8lmak,.m`9sang',E  pC:LXUsÂbs\≥su¯©rio4\AQWDauA\\ÌMcan™\P“’grx—s\pBytijn\Ùytn_n3ëó\\h+b\ﬁumaÍa\]o‡ssb&e.yˇ $?   ôPyèaDÎ∆)hâäb8'fcYilm{azp Ê˘,é`AfXú^w7˜\;5bÁ—âü\UÎg\®qWp≥∂ccm,T\H”¨UbkMl\Pi∞ho|\PQ8ho&;11tﬂLiO\eNrilXpasPerÓgy',Ω
+ d'PM»OD◊ME'>
+$n('eÌaiLpombcyEÏ
+{ 'É)\\Qer_L\UaÂ√°s,o\|dpp&1taÕæLofIl\[|ro5∫amY\PIhoØ˛\Pqthons11^Lij]\eÌfilzipo {cy5(y'ﬁm
+ i'PKODaE'
+å
+8('·oailLqu≠OriÍ[me 
+vñ 'K*\\ter÷G\UT0√°`Io\’pp÷`taFOLo¬l\LArofBam“G\Py7hoE\Pÿ∂ho611	]Li‡ú\e˚eilÌ%ÒuOyria5me.‹y'ÂΩ
+ :&'PnODkEE'#,
+:|('ÂAaid.ut»s#L∞
+ ®x'C5R\UìQrsW¨Us5S!räC^\g`pD;µm\•Loc{·LúT.g°ÄYÃT`iUjmnWPYƒ™gnÔ[1¬ÂXÎ·NVTebiDt(Ω÷ikt ˙£,m`%@ù“Ÿ|«¬X\'7ﬁ¨ñ"
+ö„JIg`yﬂ@`?A28 7[æt^–pgvld¬£ˆ«¢rW€ÕTIcN÷YR˘∆⁄¨œ˜´åDÃUÉ s*PYTZtqc/¸4hs¸‚s.¿znu√\:fzg´ceFpn?ôc¸!ü! "ÂPYÙED’F')º
+ &l'fS‰li·",{0 _:\»wse‚M\\[eu√ÅioT‹ApŒ‰ata\Lo√alVPr"raÍU\\U|th7f\\!{thC^319X\L(¬\\q\pli¢.py°,t  ¡æYM.≈UL˝E),≠j  ™ßge¸ÿpt£a
+† 'a;\\[Îerv\Uìh√°:ko\uppÜ)taÕ^Loml\TPro5am4y\P·tho›Q\P˜xhol+11\0Li0P\g{XopƒÉpyó
+"w 'XMOeQLE|Å,	Å (£'et@·ssÁf
+† 'C\\L1er¬Ã\U1D√°—Ao\ŸDppßataxLorml\[‡roH6amˇ,\pWhoÔF\Ptho*‹11^MLiH\gF$paPu.p∫",(  IIM~8UL]-,$r  0Oge·ex¢ì,/H¶`!--:\]«qeõ}X|Qz]¬5_k'~Expd≥ƒou]{CqeH\Rgv‡‡èuu	UyÆDm.‹LÄ8dMNõ7LQeÈv]f$hXaxtßGy'u
+ 8-'P]LODtUE'),
++$(g{$obæ
+
+Ú2 '!>\\Ger[’\UK≥√°ÿo\\Epptata\ULo"@l\\hro√Ham⁄\\PÈıhon\P8hoÓy11úDLiJD\g·}b.jú',%	  :!PYEgDUoT')£≠
+ ÙÉ&g
+”p'™É
+ ÿ*'ChÒ\UsMrsBUsn~°rΩ.\\ËpDçLa\txocK-\\uRog≤mmsÁãPy2)onñ®PyXjonWb1\llibÙ’gz˘<.pµg,z  Ì\YMkUL—j),ıK  ü0hasiliOß,
+  ¶:\TWseN\\su√≈6ioALApxDathp\Lø.alH˘Prdjra=t\\Z}th86\\B¯thoi319/\L—~\\#shoib.3h',  l3Py≈EDUY')Â
+ 1f'hÎtc'x*`=5'CKYDUÒ-xs≈Erxs°rio\<ë|·ƒlgq=Hoch˙VqPÁEjfJkˆMvHñxX¢Xv·ilÅÌÓjµ(ÔmˇI¬O®(ƒÙØmÊqw,=z0bOXY≈ùLe‡-_H 0$ jla]#Ù:ˆ0HC:\|u7e|y‹YApq√Ö¸kÎ}|≈`tQAÚcD|M{c£2_^pcÀÏ_m~\1]rurÁ‹4tgÎØ˙-çn>cb\-ztm,|\__Eni‹ˇ_.1',¢  +PY`DU®e')Ã
+ @,'hyAl.vvti§kes#ˆ
+d≥ 'Cö\\dgerj\Uqx√°JÈo\<YppXIta\[Low·l\˘0roeramy\P|hox\PJ_ho.s11]ÃLibÃhvyl\gnt^ie¯vpyo<
+à2 'D^MOfsLEP|,70 (”TttEs,	d  cw:\˙·seg3\\usu√° io~rApatÏ`\LãalZfPrVcraÕÒ\\|sthê⁄\\p]thüÊ31¡Ù\L:`\\¢√tp|ò__init_&.p,(  -}YMD\ULEe),
+  ,(ht˘.cLAen|,Zµ  ·„:\M7se¸’\\^u√uRioåWApX«atA"]LÁ6al‹Pro<ra,a\\£˜Ùhˇe\\X≠th®«32-X\~ey^‹˙Ìtl‹\[LPØ⁄‰$[Á,)_ ¢ %»—¡ÆPHD,7x*I54[;-yoie+Ã/Ns(èi	r»]ˆ5Rc/RUseÂ°rmø\\AxpDÚ|a\^ÑÔcpı\\SRog≤ymsV¸Pyp⁄on\OPyÁLon7≤1\\ˆib‹ht<√\\c˝okaÙjaˆpy',œ∫  0oPYÔDUõE')9ó
+ ?G'hL‰p.jƒrvi:',m)  `$C:¢Us≈s\9‘suYóriÏ}\A¶rDa&p\\NßcadO\Pvggrq∆s\Qyt•~n\åPytn9n3”ñ\\tkb\l2tteI\sajve“¡py'
+ 'gSMO6∆LEf1<F (∑imp%d
+ · 'K\\WÒerr⁄\UkY√°xio\enpp|»tavLov„l\yÇro"amyù\P}XhoX\P†hoRS11HìLi;T\içŸ.p¢&,Û(  ÛYMOeUL≈‘),V
+  =!im¢MrtÓlb'•
+ 1'C*ò|U{usP®Us»V!rim\\EpE<Áa^\Lgc`-lRpÄk'›m{[⁄siˆ`r>ŒwÂOé;≈Ò+x\˚MtóLq”|4ÏËÜ_º˛W1vUfp5¯Ñ* !h<Q[^f◊a¡18î+¢∏4IeQ°J\f˛¨™')¯D&ˇ,h&‚&A“ﬂNWs*cÏï◊u’ÕW—;k∫5pÎD`^ıLNFo9eÌ¨Lr'[5ÌwRUë·*L}]¬Qq-Ôoi8jDËgØÙimy…rtmJb\ÃPab≤py%)
+‚Ñ 'Â[MOLWLE·m(` (Ê)mpÆ‚tlU"._Ú¿ot∑praQ&,"  gK:\|TseÍà\\Tu√°rioTPAppLatk\LØkalcSPbmuram/\\÷thmÂ\\1thÊ}311Ÿ\Lcj\\)Épo\4lië\_‹gotAlra±=py&(
+O0 'jvMO‚’LE%,,à@ (
+)mp*htlsÍ._⁄Ïot„∑raeUex¢ırn±m',
+  ¢≈C:“UsÙ s\>su	%riˆq\AÒ0Da8õ\\Dgca4\PZ}grqs\\Pytâ#n\ÁRyt˜n3;\\t‡b‹Æmp„rtl3X\\1AooÏrtr@ì_e¥xerkrl.¿J',ïr  ¬/PYMgƒUm?')>ﬂ
+ ¢.'iY±orgDib/ebcv›'""/ÎZıBreZSM\VDTãxp£©u-à≤‚qQ˜LOÛiƒ4ﬁqıóDÚ•}kZvπ,z/ﬂT#5†«n„1Q\˙`I&dr)ÔTˇftLÅ+[~A.#Œ`x',@  ’YM/DUL`ß),K  :im⁄ort<Rb.scch˙PerY',«(  ß:\=ÙseíS\\W˚u√"~io¥HApsDatcˇ\Lal^\Prokrao\\¬€thw^\\PLth¥U31•\LÈ/\\O}poC4liAÃ\m3¢hibcryœQy'$ã
+ q 'P_OD}∫E'in
+π2('qpoe
+lirÜmefcdaS!',ÙR  hC:î@Us*ts\\su#Ÿri@\A1"DaLÓ\\Õ£ca!h\P~gr]Cs\Ã™ythÕn\lZyt`Mn3Ì2\\áIb\\xmpg∞tlhB\\Ìsta‹taL __áoitO[.p©,BD  ØQYMœmULM7),(  XimŸürtÌHb.I·ta}#tag+adb~e+”',^Ç$`k=:euUs≈¢w\|ï3e”≠sk-1\AZda~E\XÃWkCœı\P†ngv1er\ly2ÆjtQitPvn6eA|MT–Ätçq…Òk2~\â¢XâxE$_lÖ]©9ae[Ú,f-r`§LŸ™9wüÿ¯„‰wLBÁklä)Äf„,xÕ`GvSÊb;.˛EÏÛ%°pËirﬂÊA'eY‡ﬁ[hæi*((o0ltAExËy˝J5J98ig<xE„‡Á‚6cµFJè€‡<Iﬁ|\ÓOs MÉ~ëyt*Wn\D‰ytxÁn3∞{\\§‰b\çKmpÔztl/j\\kEta`ta/L_ciMlecioœ;.pWc,:  gLYM
+ULÁ),å»  ()im2ortDkb.Óyta(ataÆófu8cto˘Ls'.Ñ
+ $F'C{t\UoùrsÇUsqÑ°r©o\\ppD˚µa\VToc2h\\“ogVcmsWtPyuxonÙ\PyÈXon¢y1\LibD imaUrt(Hb\|#etmÍat„\\_FWnc;)olÁnpy!l
+0W 'P˚MODSLE',,† (Æ$mpCtl…3.mquadi¿a.‹~tezxoo|N',»  +µC:D~Us<es\q÷suS´riIH\AˆYDa˚„\\øbcaÊÄ\PSigrg]s\^ƒyty&n\lQytÍ`n3(·\\‹Îo\P·Ìp[8‘.êﬂ›\oawad–U(ú|OCîa˘4œ/Lké˙b¶™`h0g»2≈!Q-EÎ6¸M C¶+zeçS]r,˚√67≈¥iditÔ.~acpc$17bX˙sIi˘\,+‡v«£äao\\Ap⁄îatc÷\L7calProra"\\8Bth~Œ\\≥˜dhÛÊ31!\\LVE\\ypoÄ|libH\mQtadaÙa\X˝me÷i.p_,
+   §ƒYMkFULu/),ç  Èóim@brtlhb.Ôta"etaÓteî~',   ÓC:Us»3s\lŒsub©rily\Ae{DapÛ\\Tci}\PPagrÂos\‹€yti‚n\◊ryt(n30?\\_˚b\|Èmp>Dtli·\\mztaπHta~~_t!ht&d≤',  aPY ◊DU|'),h
+  5'iº`or`,ib06eaderswÿ
+°7 '‚z\\UterqV\Urx√°˙Lo\N=ppÌ¡ta|≈Do!ﬂl\XZro#∏amy\P[dhom\P8thoj/11x\L)b\‹âmpKqTlHs_\”eat•Ú.H',!®j'∞Y~DEnW').Õ :H#kE bDFI·ñre”MU^√G˛a$Æ	S'‚q$ié~2T}O™}·In|ﬁgQt·Ã5ù\¸cEa`ÕËuÛ-QEÕSjzÿ9_9X¸¸ñyuJxÓ2\7ƒòpﬁÂ‹ˆPOqv∆\jTM–«MN5DCgÈ`q}_S}X2Q_æf3,,	pdj&0|ÖSÑ‹ˇ1hçJ·OG1[˝k“¯Ãô√ÌzesVrc!›._Õ‘apÙerseÙ
+‚ '‚:\\z|erd1\U˘√°0Èo\7¡pp§ÙtaﬁULoYql\KProdPamyú\P}eho~\PA`hon311{\Lip‹\ii{orx\ib^<re”äurQs\Xœadfte©{.pΩƒ,J6  dRYM/GUL·'),ã  `[im¨rtJÈb.z’soS;ceqÆ_cÔÀmoe#,"(  ß{:\^Bse˙p\\U;u√†xioì˝Ap∞Datbt\L9malFPrafra•∫\\Tqth·G\\ âthZÆ31´\Lcq\\€øpo˘¥liH2\rîRou gesºo_„’˝mok(py•/
+Ë† 'xUMODQLE,
+! (!Nmpıqtl-'.rÁ7ou`ies‰UitÁ-qjyg‰;H:'>≥>>U‡sÌÛP|W‘ÍU”a6	Oõò1y@ÖCd (éŸSCı\}U`gHmlß^◊zQwø˙W€{d·n£ª?7≈Dabl\anukfi…c^˛P‰#/G∏`a}\+˜ß’≈d|igs,p[ÿE  *ÀPYÛnDUD2')b'
+ 1'y=por\ºib6escyrcu;._z}gaq’',œ  ©C:\YUs?Ts\‘YsuCribˇAt2Dal‡\\ÏccalQ\P{Kgr¢Ks\Vyt≠§n\P‘ytd^n3%\\îbb\amp'tliZ\\*oso˝∞ce3N\_<≈gakº.p]u,Ø≠  YM«zULA),+0  ¢'imrŒrtmcb.JwsoÒ6cerZab§, p  !G:\Ãñsewc\\[Áu√¨íioJlAppDat"O\LO3alﬁúPrÒwramõ\\kthK¢\\Í·thÁÓ31z\Lc\\8}po”vlis\rscoud‚esUMabkpyÔ$
+4y '–ZMO«LEa	,
+) (C+mrmjtl1..r-BoÂpÁesTeaˆérso+!0'a^\\πbErt]]’5w√•bwoTbp‡atAU≈ocnNLproßub≈d—aQ∂eL[\ŸWÛV1oi:YxÃDHXD<yX‘nrL {Ú˘‹wƒ0Áu""gu~&¨f‰Í◊or˘ô`´»hì2aNi·BF¸’ß%2S*'ôtc%]¸lL-u\)»Âßlº „@∞t}∆uBK|‹wÕeCò*Iz]ÿ‡R◊Da]Tc,œœaÂ~“–∞?≥jÖYV∞t–PsMn\U$ythOn30Ω\\E*b\\KmpmrtlÃÌ\\˝‰iLPy'!
+  j'P9LOD$E'"!
+ f('W.spabt'ë<
+  ‡'C§`\Qg4rsL\Usu…°rŸÔ\\„DpD°~a\_∆ocÂH\\qìogms lPy⁄‡onÙRPyOHon´e1\OJibWinuec∫py/
+!+ 'M8MO∂LE',:" (ËÚsm¶T,'k  Ü):\Ãse"r\\î˙u√u;io›‰Aptatœ‹\LcGal‹»PrcnraÏ`\\`th©k\\‘Úth|731f\L~[\\i›onw”__j%it+l.p≥£,È4  "YMÌLULe),ã  )-jsﬂÏ.d„”odD',Rg   ßc:\uses\\mvu√'io‘MApˆ&atoX\LJsalT\PrØUra=s\\yythGn\\p)thrπ31±˘\LYÃ\\'pon⁄ldeo∆des∂py?&
+ " '∆_MOD‘LE7ﬂ,% ('Xsoı»en Ø‰e2,(  o:\˙—se‘s\\o–u√âqio^XApQeat9‘\LÌŒal˚Pr€ra·I\\OØthÌ˝\\¢xthç`31o\\L!b\\*(onben;ddeZ,pyEh
+¯ '`iMOûËLE¬,£ (gsojscgknec¶,Ml  fs:\⁄—sef;\\MÍu√Ã‚ioÑﬁApvat`_\LWcalËhPr‡`ra?z\\Ã˛thÔ\\÷ythf<31'ú\LÂ™\\J≤onXYsCqhneö"py≥d
+pr 'LZMO!‹LE*#,	ô (ßnog'@no5$
+Ä™!'û0\„Q!RZTôuG±çãÔTåa>Q\apq.|o ˜dMq)_~2ÈnSﬁ|íìd∫À,[çtuqx-9~=z§‰r\$jq~!æÊÃ€◊ROkaU◊Xt1YC°∫ä∏ÅÇVYàMÙMDEø-j
+h!)^˘nMm7$5!ﬂ)\46cCfez+TnP\Ã{KtÈˆ.eAiˆ›#ldÏyvt  LÛ7Y∑$\«TYhOßTA¢í,^ ('lzm‡F,.¬  'q:\xseVk\\0u√LÔioLAp∆latŸ\LCal~ﬁPrÔcra	r\\ythDN\\bKth)315\Li\\†gma(xy'Í
+ ˘"'PY,OD_HE'k¨
+˘h'iÎmeŸpeu¢,¯Ñ  ∞@:\PEse˙+\\gBu√•ÚiotAp]Jat@8\LÌealNPrh+rao-\\q˚thO{\\Rythl‚31`|\L°\\limev(pew*pyÎx
+b& 'pYMO0LEW´,ö (#Öulnhprë¢es{Hng6
+"Ã 'K˙\\ó{erh¬\Uı√°hko\ZIppÇataH∆Lo3‡l\PZrod≤am“_\PrehoÀR\PK§hom∫11=úLi„ÎLm`ti(˚oc rsiå$^\rﬂinMp__,òq'= †x'P˘KOD„E'Õg@'*elt˛¿r_A"3{Mfo>¿hfnqWDiŒc†∏Ë`=o;ÂN›sgMr‹4°{3ÀuÁÕ-ê\˘6pg‰¨~ﬁCcáal}PrÏ«rAs#\\TˇtheÆ\\s˘tho.31&Ë\Lm \\hultYroCdss-fg\E`on‘ct·gn.P˘',	2  h+PY†ﬂDUÃG')<
+ ò'mq`tiHfocfÁsifU.c/BtepT',Õ  +®C:}UsÁ∞s\‘Ssuç–ri{Õ\Aµ–DatÚ\\ojca¿∞\P?kgrsds\:yt≥Ûn\\‡yth~n3Kò\\Iyb\rMulñÎpr,sesÉÈng=Oco~tex¸Êpy_@
+∞) '^PMOD[LEõ	,ah (>]ulIprÀcesQkng∫jumx',
+Ï  *&C:f}Us~s\ø¬suk.ri)º\A\bDaD\\:ca-›\P&grcs\Æyt†n\>»ytjÀn32<\\\ib\E@ul7yprKbes˝˚ng$†dukqi\ZL_ieitﬁM∫pyk®
+® 'ú]Lg.U\ü ,-®$ËcµˆÓzr\t‡r˚f—∏QuÌ≠9[5L‰@:MOÍ‡pg$L FBL,#/¯]TP5Â£[ıX\`PpPaÚâ\úDÌk|‰me÷laLs P–KlËgÏ›Ëë$\Œf◊…1Xl|´ ommA‘tt
+N^fcÒn'\ö"˝iÎÁzTqMΩqictiüw7@t1(%3˛!`ƒ‹_DPFCÕ)jz  /mu<HipjlceXinW™foJ-Se`8er?£
+," 'gr\\qsersÏ\UGç√°ˆ¿o\HppD‡taILoSel\¿0roñ`amSı\PyÙhouV\PyDhol117TLic\mwNtiÂ2ocEwsiÁû\\≤'rkqmrvÂ].p˛7,1
+  ØvYMÕEUL•),  ÑmuÂÁipˆgceqin&heË–',E¬  gC:\kUsUPs\B>su$ÔrijI\A|Daby\\‹.cajX\PVNgrŸ÷s\T yt!Rn\{êytn)n3;!\\éÀb\yÏul0hpromesc…ng‹FheA`.pÚ,ã§  YMFpUL»'),´ä  7ómuêPipµm„ezÉinŸma¯·getC',	Í  !¨C:nLUs≠s\lısuœUri^Q]E^yDa¸d\_,Ôcar|P‡©#"çÈs\¸Óytjén‹>Myf/_n0døL}‹œG¸yldhyn–2Ârµ:]iwuM\ç5agÂ»}.≈◊o,,6@b≥ß0G≈'VLE?(Øk5<d'm=itiªxoc!8siÊ5.pwOl'O
+ †`'C2\\USErs¸dUsw˚°rtC\\FHpD’ma\loc!f\\Tˆog*QmsmıPyg‚onﬁ|@yR`on≥91\Tib\UmuodypúlcÂ3inœæ\poml.[È',Mm  !'PYLÅDU-˘').
+ #2'm›wth1oc†siÓ+.p9qenv$orZY,
+  √:\q\sesŒ\\:u√‡~ioﬂLAp4MatbX\Lncal∑ƒPrOÇraËÁ\\–Oth^r\\PÕths„31”|\LÊk\\ˇqltÎ ro#issÍGg\Lµop#*_f∆Sk.z',	  <ÆPYÚlDUŒ')/A
+ V'mÊmtip8ocjWsiO«.p{4en(orkgerar'&,
+  à'C^Ù\UáxvstR’s—°rkf\LÅpDk≈a\GBic8,\Lt4ow˛·eCü›pya·O~Ã«PyWbmÃwÂ1Å»2JºŸmÉ§Idv/ˆ{ÈIL'ˆNqotmmC§wˇ˘Ò2vq∫>¢c$çû`U˙∑VãZD\ID!q‹ò6A∆6e-GUmÙvw¬•c≥ojf.8Ô◊›&S”v¡udﬁx]⁄ÈX€‹>™*$É«^|FsQq‹UïSu£!x'Ku‘@swƒPa_|wﬂÍ±lZyäB˚GcMe]›|!Ï(#b·\P¨Qhof15X“LidL\m]vti»zocicsiD\\`Ope._sp[_n_YGsi ÆpyG,
+!‡ 'hŸMODSLE& ,J  (|ulU`prgbes”hng~xop)^_s1˘wnqin∞ë',∫  „.C:‘UsÌ¡s\Òsu¶‡riˇH\A´–Da\Å\\Kica€m\Pj/gróhs\,zyt-bn\PytHn3Q\\ÃÈb\{tul<˙pr√ØesUcng4}poän_j0awttwizô2.|â',UY  ¶gPYM]DUlG')$A
+ )'m¢Mti@koc‰Ssi*Ø.pr_ceIQ',JJ  1¢C:›\Us»∑s\∑rsu·æri<\A(DaD6\\˛.caV\Prfgr5usXPytxCn\~Tyt/n3Pu‹\æ*b\úàul|Iqrz!ewwYdgf˛xRfG#{çr˘¢åQ¢p&PImM›Wƒﬂé--}hÆ4®TÌ.}fxnd!5\cao™WwdA&xgfÌXµÜ$a+sY~]d7«Dtqu_˘‚ k@0„t}s°y¡Lo#÷l\]ro|vaml‹\PqUhoÆ]\P;6ho211¯DLiN¸\mq,tiGocMssi∑\\’\eufQ.pY',*¡  &YYM\ÏUL√.),Ã  å¥mulliprNcesJinçÜreßSctÒmn'.˝
+ !`'C|]\U}drs^|UsP„°rˇ\\—pDÉ2a\ŸÏochÛ\\vog6Amsl~PyÙ,onŒPyu)on y1\Ãibtmuî¸ip|ãce2qinß\rIjucthon,,y'åÌ
+ B0'PHœOD}]E'ÈH
+!('Ì_lt¿aroOssDg.~°soã]ceÊÏha“Cr'
+ Mc'Cr\UQprsJ^Usjz°rπÆ\\Gqp@a`a\\oc`L\\Xvog Æms\ÃPy¸hon¯PyÎon;y1\u§ibﬂYmul±h`qgje0ìmnÖLrW«Ôu„|e_zcj§46pk{,-õ,  e¿Qq‹GELU7/ß
+® i#eâ‘Aa\äk”{UaTT,–.|ow@Û¯X‘z·M'µnoG9`aÔCö]^-Òt˜}OTa5kIFx]òØ%Ü\^Í°·\¿äXq˝wt_nW>Jƒ@,L|s∂[Xqti	§2†ï\_^ir‹TgLÓ´¡zÎ°cíßI~eGX$≈„1TFw{rqÒ‚≠¥%ˆ≠(I‰,"!fYM‡ULäT),Ur  HÆmu-4ip(Áce˚qinhrsh°ded[emG\y'Ìï
+ (É'C≤›\UsVrs@|UsuÖ°r¶n\\
+ZpDe|a\Õo#£8\\Íogjgms|TXy—honT|Pymoon#11\ZåibXXmu.{ipS·cejMinG\\s(ArevmeWry.Py'L:
+ $>'Px—ODUnE'∑`
+–('<qltqrogGssÎßg.V≠arı`ctÁdeso®
+@  '\p\\WÉer{`\UZe√°z]o\|ÅppÄ{ta^^LoŸzl\ÿbroÛqam«‘\P®πhoÿZ\Pâzho.311FLijV\mdNtisocÀsi]!\\C!arbpcte0es{óy'`ø
+ 01'PëMODWNE'yÜ
+$('Zodt93ro«-qs…leéc4a7*e,¢¥  k„:1wrEz”\\ex}„¥}ioª/AL–dYX·|€<UdVcÙe7rgp	Â^ÆPy16l
+qzb_N2YÒ\|¿©`HÃkÎpéœEh#	lD‘<ˆb-Rn.∞ª',W8  LhPY˙(DUL ')Dc
+ œ'm∏dtiZ˛oce€si‰G/sa’ch2Áni¸e',  "'C:ƒUst≤s\ÑEsu√ riM\A@@Daz,\\ôÏcat]\Pkmgr£ls\_Ryt"gn\|‚ytdgn3±\\lkb\Xul‰äpr%uess'ngPHsy&0hr›<izmépy6%
+ ™ 'P0MO&ÙLEË,à (mul\àpri{es~Ông≠`ti„",™  +I:\ tse@‹\\ùXu√ˆzio~ªApBDa4uz\Leialª`PrOdra›Í\\úyth!o\\0*thuf31%U\L˜\\0+lt)¯rofÑssazg\W±ti.pyä
+0 '‘‡MOovLEoÿ,a (˜\yseh',èH   ßC:€GQs◊Ps\^˛suCriÕtI{0Dq|J–\^_G)d…\P@Øn`c0rlÓ·yehgL\xŸt˛ä‚b11~t¥!X”:|E=paÉ≈ÂÓ¡wíÏwöS,w)s≥ı\T`π®+∞hPS/UU@B!:ÅN!i©$xu£≥H&ÊLJm!Ùb¶g¢y  "µ»^\]‚*kLÆUa¸◊ò2bN=gw2|¯ˆarÕ;cE¸VR{ÜÁx—‰sT◊‰hT}ﬂJC∏<cojc‹˘\HaÚ¸Z<it7-pa·KagH|\\e0sqÏ]\cc
+neˆ¢or\\__`^it√.pÿ%,""  jbYMwdULÄc),:  (#my˜≠l.;ÁnnjGtornab;raETs',-
+ ∑¢'CÇW\U5∑rsT?UsF‚°rÌ+\\aápD£ta\t$oc˚ñ\\iog\ms€ePy°on7\Py»non∞11\‹hkb≠si~<-p!PkaÁps\^OysyL\\Cnn„to;N\a ‚trc.tsÜ8y',@
+ 96'P_jOD$NE'±-
+ ¢('$∞sq&co
+|ec·Ìr.m=thEoti$‚tiTÚ',åJ  2øC:LUs%rs\UsuK riN¸\ApËDaå'\\Dcas>\PsËgr◊s\<Íytfgn\LPytx.n3p∏\\})b\zpi4WIpaƒ6age\|kXsqxD|cmnneBuIzH<5}_‡Eb,ha£\yiö˛‹s%–5Pj&'ÍŸDOM]M¶ï=*`+«-˙cﬂgb§6`Á2k36gn!‡p§¸Yé/ †´3 *iÃ$y˛»\\ucu√…ªiorıApP\atn|\LoalT\Pr„Áraùy\\Jhthku\\’{th©˛31<\LhE\\gte@achge;T\m[#qlMcoÜec~jr\:harÁet~.py)¥
+Á1 '©lMOÜ◊LEÌ0,2¿ ();ysT‰.cn∂neC{or2 on!qctCnn'Z8
+ D®'C\\U—Órs\LUsyc°rÈ©\\E`pDE|a\ oc)b\\D`ogÁÎmsD?Py\honF\PyPbon#1\ú„ibOîsiv-phckae#s\qÓys\\\FLnn“torW\cnlne#TioT(py%Ï
+†¢ 'G;MOåALEîÀ, (/MysLX.c]‚neD1orã[on*%ctSkn_;wxt&¥
+ ƒ 'jB\\á®erT\U¯w√°rçm\·pp$cvaVmlÔr/\ıQr/jxAm˙Wpv÷Ho¨UQËˆh>L≤13X]^y`3\”DrE¯aC+©ıiÛ}ŸiUfö¢åXÀYB&7‡UP\!1ı~\madJkI^§lTÚy3/πñ!‡e"P`jÎJVlÅÔ+jÓò #'?j{u|∆™s†¢—i2a2á⁄ñuUh(ÿ”¥(ó**9¢ga<X6â$z`]ÌZeo· |o~<i 0îÉ7UHÕkm,]ûOz˝_2(dá%~Y¸†hoØh\PÅÒho11\hLij\sn|e-‘«ck»)es¸myrÒl\úKonxKctﬂ5\\ÔÀnsp«nt3pyßû
+b* 'lMO4uLE!),2W (q/ys)Ó.ckNneRAorÖbonÓÏrsyCn'˛ü
+ H3'C\Us+rs¯‹UsÊ„°rH\\”ypDATa\`Doc°Ë\\qogßjmsÙÿPynhon»VPyÈon6_1\Y@ib…<sib%≠psdkaÁ—s\ÂysUD\\‡œnn›touN\c«Lve¯ioXpyÎÏ
+j  '”MOZâLE≈,Æ† (/ys1.cÈmneStor&·uraÔr','
+ ƒ”'C4\UwÔrsîUsy¡°rij\\Y\pD!|a\9Loci˝\\PtogamsLŸPyÊ6onBUPy~/onº1Q±‘]kh˜Ïm⁄âcY@oE|%Y3o^ùãÁnioB(Õ~Ï>A∑c3åRg≥}TÃ"%´ìY{OÏ]uWq©°ç¨xdÔIiis9}Æ¡lßfes1|ÚX"9nÎVk|F.åÍ  'I:\ ®3epΩ\\w·u√•4io»]ApÔat°f\LOcalDÿPrÃcraıq\\‹thØ~\\õ}thoÓ311@\LÒ\\ﬁÂteYfacs/ge4T\m8”ql‹[coÓ|ecîr\|+urF/r_a˝xt∫Òy'0
+ "#'PäiODƒPE'm
+é†('ÈÈsqÙTco,Áec4ùr.¥TstÔg_t9xes']
+*j 'gn\\RCer{<\U/√°Vmo\‹	ppVataVPLowAl\H roÏæam«M\P¯>hozy\P˘Õho2.11XNLiJw\s,Ùe‰dckpfesƒTmyvSl\YconLctp\\hst¥_t}esH¶y'4¨
+ ('P¡ãODe|E'-0
+¥a(']{sq˚coNJeckr.ebapVb,¡( TÇ:\Tòse”\\	qu√√4io§YOp\@at0’\H~kal˛1’r+gqqk„]XtRt(C T,DWQ9‰pwâQ_ZNqr| ØZs‰Và#9·¶q∑Vmyn(.|uk_j.≈fUv˝ﬁg≈R¯ `8Ënz,QŸ«NäVàs©/,≠! &ttj§m&Êàd˜e˝ˆFLot¬0jPœ”t≈F(Ebh ∑D6EX@r{‹XEr}Â`rknTpxÿ|‰úìYÏbc	-]ô˝N'¯K…€›ﬂvÛvbon<]Pyälon551\\Libú÷sil-pj,ka$ßs\LÎys9Ã\\gÁnndÃto˙V\e}7orkndetty'(
+ !'P9EODïAE'H
+z,('}y7•l.ÄˇnnCtoŒer˙mrs≥_
+Aı &√˙\\±werz{\UÚ>√°¬io\ÙÁppñÑtaN›LoBl\≥®ro_bamJN\PY¥ho˛G\PmqhoF11‹ÏLi¢Ó^snke-pXckÈ•esA<my3pl\h onecth˛\\Tro—u.p,6   K’YMEŒULë),-  Çwmy[‚l.rØnn/!to‹<loÛWle1$,Ê‚  ß:\IseÚ„\\gΩu√%¥iodApUat›<\LU—al-~Pr˛fra3\\Q:thq"t,xFƒjmûπ!æ—D˚Q‡u}˝A~gÒÍQoi47Fª]=ˇi5Pdrx3yHFEÂh+∆tNENs›§GnÏ;W}˙˝TO?Ê÷|¢9ù·# !bYHÔD$Ï&)…}j>	".ûøUp%√dnÔÂ]B<,"!bMN≈_ﬂÑ  .':\–seÚ\\a{u√•ioX]AprÖata\\LK|al\®PrÓgraÓK\\PÈthn
+\\Q	thn31%|\LÀz\\ÛÈte%®acÎ°gex\\mq£qlNLconnec4r\IogC4r.th',,
+   ;PY-ﬂDU1')Ì
+ ƒ$'mmql´„onFcti".nk|wo~m',áê  ¥:C:W^Us∑Ìs\Ü6sup9ri]\At`Dagp\\Lca'T\P2Lgrds\x÷yt`an\,‰ython3¯2\\(jb\Úit‡Êpa„aghq\\4˚sqm¿\cπnesÂor8neevori£py'd
+z¶ g–CMOtôLEcç,˛ (MØysq`.c,nne{xor‰Ûpt{œnfÈÏes4
+&4$'d\\≥erSf\Usy√°y)m\‘	ppD„tauLo(Ï\◊=qoÁamgL\P˚‘™Oå@$DHGn711|MDibÑTÛipucêD7qao7s^mHZqd|\D_6ˇ˝KtNzo{˚ΩπoØ¶ò|Ir{r{6(Ç ‡åŒxnúE1L≈iV1
+ ‰hfÂ]Cµz˛QGÓ#uôUwrxÏ}^IÚinoöd aQ'Ä42qcwWP˚˜»!ÛyoU}»xn’~oMTÕm√ll‘xÚÙß1±llST®XP Öb]^⁄ytin3!Ò\Õib\_sitÂ?paÜëagk\\Ëqsq.s\cKQne√‰orº-plkˆinÒ4\_I*i4__.0y',   8PY„ûDU^ù')-M
+ +'mˇ5qll¢onNÂct_ª.pnli^x',¬  ßgC:◊Us˝~s\\Uåu√°Ejo\M’ppLßta>Lo]kl\dZrogpam∂T\Pw‘holp\Pz7ho$;11TLiTY\sOre-¯jck®es~my”Ùl\w!onÁ˜ctO\\¯ÌolkŒg.‘M',   ¢PYD>DU|E')E
+ {R'myŸqltÅon.$ctÎ∞.pR|toa7l'
+ †…'C,\\US¶rsD0Us„°rÔÊ\\ApDRwa\\˜ocad\\PRÔgrmms\\ytÈon\Ï ytz:n3Q\\Lb\}sit‡#pa„kag`q\\oysqdµ\cj˙neQ^or\pr{|oco«.p}ø,K&  #rYMNNULD),
+  +myqq4*co/Ïectœr.|Qpew,ä!  ?G:\”ser6\\UCu√!sioF⁄Ap0DatxL\Lo/al˝\PrÍ`rais\\ÿsthcN\\Œyth/L31ÅÌ\Lız\\{ate≠accage7\\mygql^\co¢nec}!r\Z<ypQq.pY%,ò   'PYM^`UL	Ï),  
+=mysAl.Knnn%Mtoc.utH]s'¥
+ ,±'C∏ \U#/rsxUsıÛ°rdO\\tpDbta\úloc±l\\P»ogÛAmsÕPyˆnon\}PYtLgn≥Ñ1\l‰ib]Zsi4e-pÈ{ca?•sﬁO9wql\][§n.dctÔvˆ\w‘j,s/`X#l1|!QEdY]e'Ìhá`$∏%hy3qtÏcuo$Edt.∞ÆA„Ú1eq™&ä§ÇáB8‹YBDÙ3ÿ›·sø8≤`gúHˆ∆Ÿ˝iX6}Rs-V‹Xno#vkHzDlQ9wBc]\P=tŸoÔ2∑q\r÷oblzqiƒ`≠pakÊ≥~\Â+‚P«|¿fÎNºeBto9Z\versik|.py+,Ín  'ÓYMìFULD´),Ωj  -7ne∫c'l-
+  !'C?Ì\U”ers UseC°rmf\\â∫pDita\TNocÏ\\pogírms¥HPypIonYPyO‡on+S1\ﬁƒibÿLne| c.ey',®X  ¢œPYMoDUo·')(M
+ )P'nvmrl3Qatag,,)  !√:\<EseSÛ\\_u√ ioüTAp\FatÌX\L;@alÕHPr-,raÎw\\P’thjr\\Pitho‘31i\\Lh‚\\*,urj†paˆp.p9!,Fœ  7QYM‰ULuø),+&  ¶'nuÌTer‰n,
+)  6f:\’seÍg\\˜cu√!bioVApatõD\LoqalPPrGAraDc\\Q~dh+Ë\\p˘th7*31°]\LC‚\\étmb}Rs.ty',Kπ   %PYODU≈')ËJÄ48c—aOEw-††‡a/£TyU;•¯Âm|\qÀÅryi\XA¢1D'wTºîYÌ'|h¯–‰/ısa•s\]QytËÂn\–Hyton39π\\i)b\ÿgpcgle.p)',	l  PYOoDUL¡')(
+ 1‘'piÁkl&, †  'K:\¸Use≈z\\Õcu√öio[AplDat‡^\LgNalƒPrwÙramC\\—1th/\\ythÖn310T\Lik\\ÂIck$ﬂ.p{O,
+   YMÊLULbS),-:  ∏&pk•srecõur	=s'0M
+ ‚'C<t\UÛÂrs8lUsvB°rªÚ\\SxpDysa\º|oc@j\\P7ogsims^Pyhon\ÊPyÙhon1\ibH˘si∞{-packafÁs\ÏrkgkesÔ)rc}c\\OinËv__.uy'nõ
+ Ç'PxMODWME'+Ï
+(à('xﬂg_<Esoucces*_vÃdoj;,! †?„2\NMse1y\\Utu√°¿Èo‹Ap˘DaueT\Lø"`l\N–r∆„r!{\\Xp"h-ËYXqtJm;ì1‹úLb]\r%ıg°CcﬂñbÌskl]“f°muSÁsV\LÜ$æM˜r_‹[_…˛Ó¥_7.új+≠∫#`DPEXWàS/.O‡3Ø>{ç_b«uEƒp`Ms>vendfr.˚Â∞kfz,zB_rgr+uSe[781
+0zP%¡__UyÙ÷Sﬂ)}k}√°‘ho\‹CppDttaå‹LoR§l\ÃHroayam+R\P~Thoo|\Pqtho*711]LiŒ\\s*te-vackafesXtpkDoreÏurc˝s\ZØveÈVor_\imuŒrtdfb_2UsoW~ce`|\_NÎniuù_.∞1',=
+   /PYJ5DU G'),/
+  X'pØ_r˜oues$veDdor®pmpZÚtlh1_r§ÂouRNesÏﬁadIpter;',çK  †-C:UUseÛs\‘%suÇàrieL\A˘Dat!\\Ñvcao›\Pb/grÂas\ùëytiËn\xpytÈ,n30\\H%b\Ltitw≠paSŸagÂz\\ªg_pksomrceì◊\_rnd˝n\\lÈpozƒlix}r}poqriÍs\Ãad·xte§ß>pxø,q  ∆pYL»ULH'),m
+  *&pk·rmªcu{˚Ós.Nﬁg~ Gro]poarmi@_Pe˚o˝b#gsx’˙w≠u>'K88"'¡	LUwepãTUı≥˜†£`m-\¡q0Ö‚ıilLo·al\^0roUram„t\Pp_hoä_\Pyvho.;11]‹LiÍG\sae-`dckA¡es÷LpkE_re ourcÁs\svemÁorUÏim2rt\Hb_QÙso_bcecd\_common.p>c,œ"  fDYMJ|UL}),	  (âpk%re{Wurcgs._6en:or.Î>pojmli3]res.urÛes.somtht'%
+†d¨'C0N\Uswrs\lUsıœ°rB[\\AppD/∂a\]Hocp\\–SogT0msÃPPy1\on‹pPyVjon3Å1\MibbNsiÙG=pi'kages\\íkgèvesÎ]rc|È\\_uenÁ/r\Nympf1tlÏM_r‰3ou>besN_ck-pa≤*py;,
+°! 'PYMOTLE0,é8 (5Pkg”WesgÙrCı._Ê£Ndcb.i(porelicˇaE3Ôujc·>IderTkol7LÅ®`(o—:¡Â—seb3\4Ùquı#3lc=AyÁ$i˝`˝Uèk°|ÑöXx/∑rYÆ7^~ZeHon\\ﬂX`x#V201óXJ|q\V˘ctgm|É+ÛC#eqŸœpKÁŒ“URÔ÷ZuEw´ÃÓµ w21X]yGtdig’2fsÛÚ#ƒ{\<_kt≈:moN„"ìE'$0#Ï%WX[BULÖT),A	  ®%pkd]reKnurkms.en‡nr.»UposllijEreSGurÉÂs.ÓNeg%cy'nÕ
+ 0'C:⁄\U⁄ïrs]|Usub°rew\\¯pDnha\X‹ocÒ|\\ ¢ogy·ms|<Py‡∏onvﬁPy˝Aon3È1\‹Libû‹siqI-p0akaa-s\Zxkg◊*esõhrci;\\=Wen‰/r\ÃompTtlAb_ruqou¥kes“‚_lıcactmpy$.
+-4 'PYMOVŸLE≈â,5 ,.ukgs~esgqrc|Y._n≈nd„:.iËorˆLib>£esc_rcÈ1.a¬c',   'C:X‘UsÂ`s\|su¡°ri\\AH6Dav!\eca‹F\PzXgriÃs\^Fyt*on\ˆrytPwn3:∞\\Làb\^ÀiÙd(pa{Y·g&r\\4kgr„so#◊cec¶\[8-~eof\\â}u{pÙla$r%su˙‡eÛÃ{aCc>Ry'cp &–üUoUÕMv..Å &i{_Wrec•°sÂe[$ayandß—.ieqorPmib^pesoqrce=.r-Qdez4',
+  ∞≤C:=~Us2s\L◊suÀ±Úi‹\ApqDax)\\|œca$\\PZÏgrcgs\XeytÈ—n\zytx*n3Ω9\\åAb\LAitÈ<pabÓagds|\r+g_}Dso!pce£$\_ˆcnd$–\\	„por~lij∑Rewmuru¬s\Nzea4,rsxy'§Ö
+ `h'P[-ODuLE'±Ï
+#á('Rig_ˆ°soyzceWj_vm.doÙ"imqlrt4ib_sso˘ncec-si}rleÊ'
+í  'C9\\OÛerL\Uw5√°Rko\\CppDataKWLoc1l\–roopamÒ¨\PŸphonM\P9dioi11\ULi¢\\sMme-x#c+—Ges∂VpogUrgslurgMs\|Uve≈doz\im≈jRt|Gb_‚usO]raasT\sKÀplÌnpqgÑ
+f''AKLˇï¨Mn·9?	) (z{«Sr„UZeRbıCvJˆ˘x$kvßmm∞a‚oólÌ*Â@è&8›º›qÁVS]={5√GpMo‹â eFÒl^‹‹H_ÉclU|∞0zÚq
+˜HTywdlPÿQiddbg?!À}|\kp\\Òcde))a„fqgesX|¯mg~r3]ıaqÁw¥T_go®lmsÃ^*!bac¨\_O-ni~“_.¯',=  £PYœOULd')®%
+ ‡('p`'_rmsouvses.œvegtor&qar—Éo.„ontlxt',
+ ‡'C:\\UXars‹KUsw‡°ri~\\appDi7a\]loci,\\Zog7kms\≈PybËon^YPy`zon381\XVib^siÿv-paNkafÁs\\~kg?resWTrces\\_4enbwr\⁄‡are'o\|{onwdxt.ry'
+ h 'PÒOOD^nE'Jj
+é ('|sg_öísoUceﬂÊ_v—ddo1&ja≤„co0¶unAtoOm2',  &/C:=ÏUsdrs\‹Usuèyri^d\A¯DatA\\Ucaú\P·Øgrms\›’ytú~\tTytåwn3π\\Lcb\∆6it…Ïpacdag$w\\ÛÔgW{dso}Úce(\_n@nTuuX‹z·rIÈo\\T}Í£teoÁ˚i3p/à 0©*RYELDDI)(< S+}iÁíjicÕ’wKÀs.vkMdoX,f5r@gc.td{t'n_
+ C 'C∂x\Uq‰rs\‘UsuC°r;_\\C¸pDa‹a\\Noc#L\\ˆog‰ÒmsAƒPy$Ûon<Pyon31\\LÈh\\rhteuacÎEge÷\pÈf_rmÛou{cesLx_vo-doa\j!¢acè\t5êt\\óﬂiÓit_nnpy3d
+F  '`OMOAELEß*,  (rkgü0eso}rcÁñ._v/ndow.mgqe_c|e2÷ÕolÛ˜,3  S:\Wsevs\\ESu√≤zio\Ap®HatiR\LsalBﬁProKrax{\\†.thxn\\0yth7Ô311≤\L	b\\qùtu}pacAge†\pÍC_rA”ou;resÿ_vbNdOÚy\mØÛe_jderı⁄olq\[]·ni∂__.Óx',ç
+   PYmèDUJE')%¨ ¿:/pAm_rE{oe;Âes.pvenn-raºorÂit”€|o.l38MÔwÙ#,:Ö £H∫ﬁ’e˜Ö–s–‹4≤|†-íÂoMWóppFatu\\Ogs)h\QznG
+°mq^ù0{tIÔdL}—˘EHgŒ40sXtD†„ö\YÂÚ&Ö–¡oiqÍc¸]Úk«‘r≈≥{4rÂek^\_ˆENBÔ8VÃ,owaite÷ˆogOw–,mrg.[y/œo
+(∞)"TŸeK¬ULn	),)
+  ®Äpkï{retÎur·Es.Ôﬁendgr.ioreiteˆqmo§V.ru"ipeq',%J  B&C:\\UseJs\XPsuŒärinÙ\A†pDatq\\ocan¯\P©Ôgra{s\Hqyt(on\SPythÂn31\\@ub\4Òitg.paa´agD2\\01g_|esoEbceu]\_ˆ"ndoÚ\\n|reo…teruooZ\\r%ci:Ês.Ù{',Ÿà  '∑PYNDUJu')≤
+  *'pkd_reÛou≤kes(vemdor˛0ac„ygiz]',Lb  'C:X\Use2s\\TsuÉriÔR\A—Dak\\lÂcaú\PÚˇgr;s\tPytòcn\t”yt§Ìn31B\\IHb\›˜it¶)pae„age]\0ˇf[‚.soqccecL\_&endGÚ‹\,!ckÔKlf^\^WmlbdShqq§dmä!™4%PuLUUL7¨5 *g<kj_&e[,z!cepoˆ‘Óe/r-∞qKoeb)nTÆ_mLÑk)|/nØ
+8Ê '@∫\\›sers\Usu√Årio\P…ppYsta\XLocal\öProAam„\Pi—ho|¸\P)uhoN±11~~LiH\s„te-sck
+es\‹pkw‹res≈ur‚gs\P_verDorÑUpa#kagÈog\]{elOdilMépy'$
+(c '’[MOfZLE%,,ûD (/rkg‹resˇurcq#._endj¬.pf‚ka!ngt]maNYliuUx'(4
+ p"'C:V\U`rs18Usm«°rm´\\xpDaa\úSoc¿È\\PoghkmsHPylhon«ÕPyupon'±1\eNib|^siﬁc-packaFWs\]Rkg_ÈesftrcΩq\\ﬂuen»gr\]zac	Pgi‚è\\omaniain}Í.pk-,*.  £“YMZJULm!),≈I (âØpk}ëre≥?uras.Z∂anf}r(ÿcCÁhn§m_lwq|ll&ux/	f(Ò &CÚLñUs•bQ–úUë‰ÀërLm\úAp(Aat_¸TOk·y\][R,gMSB$@ì™iW‘›Ppxcl"·8n⁄x¡bg|sÈpg-ÿØBoÒˇg+˛¨paÏV„5Ô÷V'eÙ‹ü2e˛ikrD[pajv·GElÍ]ùnuz|xif7∏.ppß$ñ
+∞bù⁄ŸLKNuLÔoc- &â'pc7_r`ouzcds"}ve¶`or≠Hackygi/m._`Arswr',%H  ßC:U\Us≈Îs\^Qsu≤¬ri«l\A(2Dag\\Ïlcal,\Pfgrdms\‹YytHÓn\ﬁyt8jn3Y\\Ï	b\USito%paoãagÑÒ\\PÅg_„so1rce˚ú\_vtndEr\\–ckKcinc|\_4qrsdR.py',!  LYMODULÂ),	H  x!pkdÀre£lurGWs.ˇgenÊ√r.`ackpging™_sTruc¥eren',é   ˜:\Tserw\\]–u√†Vio˛TAp|Gat!‹\LØoalnPrgra!“\\SkthAk\\Pythˇ¬31∑Z\LfÄ\\”iteg\ac.Age{&\p…„_r¨cou`ÁesúC_v$ƒdh{òt‡Îegi˜gLﬁGcÙpkcîı˘$.P˚K|6¢&!†$`qMœ ≈˝%!),K0`BOpk€ÂãóQ{57˚R0]telh7˙has)kF¡?G75ju|È{My'Èé+ "'É
+T\TXer€\\Usu√°roo\!ppFmta\\LokBl\~Xro7ˆam≥◊\Py|hof]\P}Thoé11_XLiì\\site-z}ckóÁes^mpkèyre{Ôurkvs\Yve¨dorÕûpaCkagihg\^ﬁto
+EniRÁr.p~'(ç(  !ßPY=DUXg')Ï
+ bL'pmg_re{ou„esî_veÌgor/qacÎ#giNõ.ma∂ke7Ò',   'C:]ˇUsÕ0s\ûTsuH·rim\\AıDalj\\Gcalr\PsØgraMs\ﬁŸytn/n\\Hythun3∏s\\Hb\0it$pa˘Zag•\\p`g_6dsoqrcexx\_ˆ,ndo=\\˘·ck≈Áing’\m√jkeBy.pY ,JÄ  /!YM	tULj/),
+  )'Ããg_resoHqce”6_vÂ˛lgJaCk!£j&g.˛%qumwÂ-elts/à` ÄgERX‹÷qerS‹xŒw√ÅÓÈN]S,0T•æi\~ÿÎ9hÏ¸Y∫ef6ÔeS\–›uio¸\\Sy‘Ë~91^ÃÕiZùCÈXEÆ∞a@m@gÂrƒykÁŸ0Ê·‹wrBarTXO`Â»ÜMR,TceicaoijuXr‚eÛ˛_re.entkn0yt8ÖJ†Í/H˝ZáLWKW5*’:I ™ÁˇkgGresm›rc	¸._~ender.p•Ûkabingn¢pef1fi${s'-M
+ 3`'C8ﬁ]U{grs\4Uss¡°riu\\…–pDyua\\LocIh\\\Rog{ams`¸Py–{onxXPyVlon≥*1\Rib\æsivÙ-p°kkaßƒs\^7kg|ResowrcaG\\en`[r\.acK·Áin·\\Sxeca¶iec”.pa',""  á]YMBULX ),MJ  ®-pkC}re1hur`es.=?enHGr.``ck°Ôinmjtacs',)à  
+ßC:P≥Us!us\€Ωsu√§riO^\APpDapf\\Ãoca<Ã\P˚KgreÔs\»0ythan\PytÏon3J±\\`èb\¸sitg/paggagdq\\t_G_Û-s„tRyEÛ:\_zg˛°t2TƒpÌ˚HQg»ÍT’l6aW”öqyo-A‚b ®#XUÂD]LT'Ym¨'8ßpswˇz˝sÔ7R„$ÛØ_◊'ÊdicpaDnÎgd)G}s<	n~.ÓØ ,d#„ß4U≈s4`s\Hp¬âwio
+_ApÙdata8\LcbalLWPrÔeram±\\sxthcx\\t{th:n311‘\LÎ\\s·teU˘ac;AgeìY\pe_r`{oudbeslt_vÁcdobQ\p{ka‚Kng‘ÙutΩ†snpÈ',•  $%PY¸sDUYA')-
+ †'p+g_ru≥ou6Ces4◊veo$or-pac.egi|f.vÖrsiK/',=   "C:vNUsmRs\^WsuÒ°ri_Z\A4∞Dau\\Dfca»ú\Pvigr^Ïs\^êyt»nn\MPytpOn3€1\\»Èb\‘yit%õpa@kagh„\\zÈg_Ê˜soUzce3\_¸UndÂr\\iacksÔinhÃ\vU|sii.pË',`  c@YMWCUL@	),	  P/pkoéreª?urOUs.Q~en\r.™atˇrmÈrsg
+‡  #$9^\useraU\UjT√±bio\T¡DuDarCLÙHo'ih^d—bÀfÚaDzT]W3vPol	\B˘Ù$IR'19‹ÃlJ \ÛÈ∂}-0Ec+cwew\(@nw˛‚msjˇ2a”y‹x◊VqoAÕzVÙ}ÓƒHds<d)tP_lnÈ__mTyál,
+ a"–YŒ_ƒUbUånç¬Ÿ('0{Â_RGsoWÚ¡e8÷ﬂvu~fOp,2lÖZfavlrs?._]$ain]_' u2'C:_\UÛsrs‹‹Us˝‡°rjD\\A0pD‰la\xLoc0Ì\\Rog"cmsVLPyphon—]Py4‰on•a1\]ÖibJ\siu…-pAoka∆s\ƒ~kg_Úesmqrces\\_Fen lr\ﬁ‡la`For]Iirk5\_]IainW_.^u',
+ä  8&PYe/DU¨5')∂
+ ",'ppg_rÈ#ou∂›es'_ve˛kkrçqla$forlnirw.anå˜oid,ë  #C:\\»sesc\\‹Bu√°iolApÙVaty?\L/EalﬁYProúra}s\\J5th+Ï\\Òth{o313\LÌL\\c	temÍack˘ge¸\pk«_rDoouRges\VGve/torWKplaTfoGÏdi˜e\\„ndroid.z[',M  ≤'PY-œDU|M'),
+ <)'ps©_r5˚ouZ˙es&}ve¸|or-“larÊor}§ir1*apÕG,0  7:\serP\\U˘u√°4io=FAp9LatOL\L©«alò¯Pro«raÌÛ\\Vÿthd\\9ıthO⁄31≥\LÎ\\cIteiacÀygeÛ\\pob_rm\ou2`es<_vejdobD\p~itfEcmdIzs\$qpiöhy'
+ 'Pq…OD—E'w/
+1 ('tig_Buso˝xceg(_vE™do&pl‰œfgv<di`R.macmsg*
+†  'c8\\mwer˜\US}√°6o\‹pp≈≠taZ<Loz}l\]Yro≤amÛt‹Py6hoNJ\Pq¯ho.5!uYLiß~\w'Bd-p$#kÒjeÛú_rk[]ri~g5rÈÒs\Õ¶e`os^tpa"tFotˇdiva8\ˇ%ÎmsŒxˇd	è!q∞8p]m_ElE!°EeÚ$ ¿*rz'˛›sorbcawÔ_d5~¿˜ÚÆpl°¿FwöMdMDq˛}J)hg*±¥C6TœQ˚aÛ7∂QSFeÀ!P/N\\¡p˚DqÙcdAmow+lPåX2eÀ`ÔsvTPElP◊v\LH·taOf≥11Lib\\s¿le-r√ck`ges|pkMre2lurLms\L}veFlorŸ\pliVfoÍœdi˙S\\%jixTy'ƒ
+  H'PYKODME'%
+
+`!('pjg_ÍcsoyRceS._vOhdojÆplUufo|odiÛs.vÂÚsi˝ƒ', P   gC:T+UsÂrs\‹TsuB!riWH\A@pData\\Îcal\Ps≠grQks\WXytHon\\Aythn3Ÿ1\\lib\^±it≈+paÎÛag·r\\wig_BssoU3ceÛH\_3Endod\\ë™atÌ»rm&ArsXÃvez„ioø;py-R
+∞ 'Q[MO"KLE#°,Bb (7`kgVresAµrc‰s._rend€r.pl§tfo˙md°s.qknd`s'§ô
+ ('CÑX\UsÔrsMxUs=ì°r+\¬ppD˘Si\WocEd\\–Pogrems\ZP[	bOÍLHy–inNsWa\‘WibKê{hd-ΩyÈÉmawUq‹úÄ+#WsÁQ/µPÈ&pQx˛ÙeŒrgÜ\\9lat‰Ârmvi2s]ﬁwir$owsÆpy*,
+® 'T!MOauLEw(,
+  ('pkgC0esW’rc`„._
+%ndi≤.tyiin9ﬂexÂgnsÌnnsº
+20 'k6\\uÔerf\\Up√°t…o\ÃApp3Ëta|Lo•il\ŸSroÏpamyl\P˝Xho.ÿ\P)|ho@∫11UHLip\\sjte-qckifes¸Xpkfÿreiurs]s\ﬁÀveltor Ïty0ong_gxtjnsi@s.Ëy',   T.PYLDUHM').I
+  'pÎÁ_rTcou0`es${ve.dor.zipf%,?  ≠f:\∫seÛ\\]‚u√ÅQio*MApd«atf\\LOqal˙oPr5Gramh\\XŸth/>\\ythgN31qX|Lkb\\ıÎte-‡ac{!geS\pcwrMõoq*8es8]v©ndg:]\Zèpp.pπß¨K†‡ØPY]DåSL˝Q,Q* lp}Œ◊rt{Our„˜weH‰÷vNÃ,
+ #`=¡
+T<mÛL2cX‹ept“ßr	ÔMD≈P¯T·eeül#%zT@Uk_˜c!lS‹Z@}ŒÁ7Œ<X‹yÚâeo#51‹tƒ)r\^ki6m-xc{i„§sXtTyÒOcgqw3c5pXuvPeræ_~_“iÊH‘S*~y'M
+  'PI]ODáÕE'Æ
+h('a9gu|l',F
+ #"'Cr}\U3ÂrsDåUst¿°r)o\\¡pqDi<a\|‰oc@<\\÷∞ogZ˘ms]hPyÙ~on~\PyUHon31\ibT~pkÁ4tiL6pyß
+¢  'QmMOƒULE/#,9 (>vla≈forÂ/,ö0  ç:\ÒÁsetg\\Uqu√®Vio¯÷Ap`Dat·lLLMoal]Prf/raÌo\\Ùythf˛\\@˝th^.31±X\LJ\\PÓatdirm¶y'ç
+ &('P	ODèE'aL
+(`('zlavÊmrm`orsD
+:  '√<\\U;erB\\Uqm√°9Ëo\_Eppƒetaº\Lo+Ål\‹‘ro˘Úam^\Pi¯hoi<\Pz<hoå11|˝LiÍ]\s pe-6©ckcfes|Lplwvfo‡	$i*q\\?˛inh^_>dy,
+ `:ßqXçLD›LdoinL*Ñ*®%TlgtMGc4ibqqoƒ˜o<§'åMÉ  &Qø^|Eew}Luu√≠kio˘\App|atÁ‘\L6«al_Prggra~\\ŸthÔn\\wyth˛h31\\Lﬂ\\qote.rackage#÷\p≠ÒtfGÚmdizs\V@ndìyidpy',
+ #$'PÈODµ‘E'œÆ
+N ('ZÓat^mrme!rs"©pi'¨
+> 'C2\\_sersl\UÚ√°⁄io\}]ppº(ta\xLol\Úrogam3L\P4ho‡~\Pˇeho:K11ﬁXLib_\s™îe-`·ckÎGes\]plUfop≈di3”\\„8i.Úy',?K  "'PY+ODUﬁo')l
+  	'pfCtfrmd©Hs.m©coÛ%,è&  A:\PUseÚq\\uªu√¢VioU‹Apsdat‚
+\LkgalÑPPr/grae€\\qthÔ~\\tVthá˝31sl\L©∫\ÙCÅteopaczageqT\p¸·tfÌ}mlas\TÁa{Os.D;Á<Å™  /YKâß¯u‹G'</ö   Øhna¥eÔr≠t€ty1l}∏?¢N »¶B◊>˜Zﬂj“CITqs˝–°:aè\x@≤QÃ`ueBúb/can\<PScrŸk„IUB˘UJœ∆⁄]‹⁄¢(™1|ZabuxR9te≠pxskeıasÿRlazzwrÏ$lRcN\ÛNCXi=«,-*! `!PYåDUJU')>
+ ‰x'pH$tfIzmdi‚s.tdrs@Ôn'dç
+ l'CV\U{ersl\Us’œ°riÌ\\spDda\XLocl\\QrogbrmsXPyvhon<ﬁPytnon7!1\\–ib8sirÓ-p#√kam≈s\Èla¥bor˚hirß‹\vU sikl.p˚',)  ÉXYMo{ULe),  h?pl!ufo‘}di{u.w,˛doSc',çÛ  0)C:\XUsNrs\‹Tsu√©ri˝\AVpDatg\\»}cal\\PrGgr)Es\∂]yt Ôn\˛Rytzon33W\\»ëb\÷Jitußpa1Oag˘c\\chat/rmtMrsXwi^6ow˛.py'F
+ " 'WQMO@ULE7#,Jd ( liSulh˙/,Í$ &I:\~1sezïT\7st”∂S˘mûÕAp±Ñ`tˆ\Ljal]^Pzèopalæ\^P˚tji|\tO≤Ïcly±‘Tdib^&VlIußlij7x|W-?»† @YUÃƒ“LA%)l=C®w√prÉ÷t'-
+ :'C<\\UqErs⁄}UsΩ⁄°ry}\\[`pDgta\]docG
+\\ÿsogìms|PyvIonXlPy6Eon$91\\Ãir_Nppp%ntry'y,
+ ",'PYHODïŒE')
+!`('dy_c'mpilu',
+  (PC:RgQsÌBs\UsuÉ°riI,\AxDavm\\˝„can^\P–ogrpÔs\ƒ–ytd{n\ïytp^n3—˘\\L¡b\)y_#ØmpIje.v{',-(  §'PYolDULE')|ù
+ †H'paoc·_
+# 'Oí\\\Yerwà\Uk]√°ÊÈo\‘CppLtaUwLoC%l\úZroKvamo\PπÓhoy\PyVho?n11\LLiKp\pÀ¬oc.iy')¨
+  :'P˘OOD≈lG'°$
+']('p1do·]da0!/,ç  3gs:Õ\]sEps\úusuK´bi_-L!t¿ƒcıg‹TH ˘8\Rpka7!IùT“y‘˚Mc\\\H&Ïmv1yXêxg‚]. ˘fogY‡·˝CÕ]W=iÊÈ}œO y{ H8 '–]ØdÖLEW»$
+Ä™H#|˚d„_2IƒL¨L~sπYk%05	§( •bN\\T˙e7q\h5QuÎ°rÈ.\\EbpDA‰{<T?ah|l•≤%Gnc≠{\]◊8"!fn\yt*ln3u±\\Lkb\=Pyd„_d·qa\Ttopabs.QA',Ö^  ¢”PYMGDU,≈')`Ï
+ dË'qu2ue'¶
+
+  'a:\\}erìx\UPË√°Jao\TExp·lta\tLoial\L0roR∏amhY\P=}ho_‡\P*lhoﬁr118DLif^\qUue.Zy'(
+ &'Px}ODQ~E'ß`
+ë('0qop a',eK   gC:T$UsÙrs\Âusuo©riX\AXpDauÉ\\LCcaZG\Pj_grxs\\RytKOn\]ytËnn39\\éib\Ë˘uoXzi.z',	  $'PY-ÔDUDD')ƒ
+ ÀH'rQ$doK',
+p  %8:\~≥sed∑\\Qu√°∞ioV\AppDatåÑ\LjoalXPr∆/ra[W\XQ4th>n\\¿WthoÊ351¸\LiF\\bHndm}*˚hMhX@°T[}]dU@Éc+ep¿3r°Ci	6m>'¿fÍ\NvIyttrÆ|AH‹—Vk´uÔãlc\AÁ46wMRrec©stwz.p]ß, ˜YMLDUL≈#),
+  ('rl{˛mplŒteb',+‘  'C:\‹UseQÚ\\Su√£ÚioT|Ap EatA‹\LOaalTDPrn'raqp\\@}thmh\\#`thoF31#D\LmÊ\\îmco˘leler.qS',%
+  !5PYEODUD@')$]
+ º>'ruépy6$
+8k 'S˙\\2≤erWX\Uz√°zeo\\Çppiata~‹Lo√`l\”Pro'Jamqx\P)4ho∆‹\PôXhof;11løLi"\rujpy'xy'´	
+  'PŸ¬OD›XE'#/
+ (('qecreus/
+ 08'Cz|\UrƒrsJxUsu√°r'\\äxpDpòa\ÑÊocav\\Xog}ams˛@PyehonôHPy‡`ooì±1\TVib\¸se‡⁄etÌÍpx'Âç
+(B '~YMDŸLE),B (§ce%i#|orß_
+$`07I:\ﬁ#k“?\L’rı„¡qÔáXW¸fÃC‰	^Ùos≥Ì\X@rˇOr#mqLLy*ov\Ã“9~	ÕÓ£9±tHL+c^Tr∆L«c4ˇrwÓpp1,J
+î¿°TYŒ,ŒM¨w,W⁄¢3%sdupÚÁOLs%-â†B$#kæ\Y’t„rw‰H[uKÅBAØ<Vir`ƒ{4dX`HgS8l\˝@roorqmJ\\PutjoÍ\\P{ho|#11\NLibT\sTve-Pack`gesjcsevdpt™kls\:__Hjit_/.p{c,*@  'qYMULAg),	  7#seRUpt5ˇls$_derrecAwionWwacfing',‚ñ  áÈ:\Lse˚4\\73u√ß&ioLoApt`atËj\LÔ#!l]úPr!Nrags\\Z3thk
+\\@th{b31=J\L`Ú\\s,te0acoage}6\sMvup4Ool°\_$"prf©at	'n_O˘rn·Ãg.j;',m  /PYYÉDUÃD').=
+ 'setupuol["_dH”tut©lsé$
+d 'c>\\T‚erw\U4Ô√°÷io\ﬁAppÃ¢ta XLo3!l\zPrnWIamßt\Pahon\\PiÃhol.11Z’L[bxy{ve2jxq+Ie+À\Nqe–uQbjoÏ˙L\œm©√$∂ˆymk@_ﬂ(niˆ$w.<a4.•`!§%R%•P‰’Lœ',,çä88(/+ı$u˛Vol3._dŸstupÒlsUcohlecÙqonw,¡&  ÉY:\L^sezq|\’wu√°zioó<Appatao\L.CalÿPr}wraÔ3\\thá}\\Xztho.311\\Lo"\\yte-1ac´fgeõU\sm4uptŒolc;\_4dstu6ilBO\_„Jllc£tigns.⁄y',≈.  PYMoDU\M')<G
+ Ë('sdDup@Ool¨_dÛtutklsÓªfultools'&M
+ ! 'Cb\\Ur%rsOUsˆÒ°rhc\\A†pDaÊa\ùocBl\\Œsog2gms^TPy?Hon\XPy|Ëon≥01LTøib\si‘A-paÓkages\LPetUstoJisX_diz4utrFs\WfundtoÔƒs.`H',áä   'PY\oDULÕ')/
+ !#'seeupvonlÛZ_$hr]uzÎlsˆ˛\oÁ%åÄr,6L3:\‹Usm`w\\rua±v]+…Ta∞AqTj^Ãå(ÈaO,>ÿq_%z°5q\‹HidJCJtDïyTPÔz3;πÙ%ŒÂbTebkrg-ê·ck‚∑bCY≥l;ut‘(3!s¸h·iÛ‹ßuh3‚ÿﬂÙ|g.`π'n(0hTYLœUN%gâM
+ 0('Û%¥t–ˆooÏkd5e*3|U{msØ=}aÿßs_ØÏmpAı',M  a#C:X\Usmss\X≈su‚iri&Ï\ApÒDaöC\\hÀcaÏ^\PvOgrPÎs\Yêyt0n\|~ytlon353\\Dib\6Site-packagC&\\sƒtuUfooÌW\\]TisˆütiLs\\_-acˆ_cÌpaˆ*py$,
+Ò ']MO`'LE•),# (setı€tofls.ÀDisT˘tit7._€Qvc„mmpjeer7,
+$a '{Ω\\UAerqÃ\U[y√°sig\œIpp¸ta\ZLoËÂl\›TroÁimÉ…\P¸ÙhoÓ‘\P9ho¶11^LiR|\s°de-pÎckagesƒ^se4ptoÌls_dyctueklsX\_m≥|cc,lpim}r.pe',ç	   œPYœDUBC')n
+ Ä(#[B7ıtˆØklì._¯IcpEIDÒl!⁄ckVeﬂut…e! M@ A'sPww}rs\lO”µ√≥Pio‹‹EêpD•Ù,^<ÆJc)n<_Òmßp)w3T\P{ÒhoÿTa{tg?¶ªÀ\\#ib\™itEØpabÍagew\\˚etuhuoo-&\\OgisNŸtilS\\ÒÒchæwe_=tilÓ]y',
+  'POD_µE'	
+2*('vutuıvools._dist‘åil|.bcVhco·˛il‚s',Ω   'C: lUs‘Rs\Lsu¬°rii˘\AˆPDa4„\\-ca‹\\P„Ágr)is\nEythÓn\~NytËon318\\.b\VqitıpaFiagfX\\cetuh∞ooL>\\œUisÙ?ti,{\\‚ÕppbnmpiDer
+ty'$$
+ • 'PYFODTFE'4-
+  ('ntu¬4ooLÚ._f%sthilPÆccepilr'
+
+ 8'C;5\Utmrs¸jUsw°rIœ\\ppD·Va\\joc¥‰\\Tog¸qmsúXyhxon˝Py¥Xony1\PQhb|Yˇk˛5≠p/gkakÂsX|–e6U4to%~qYÙQe)UzqTmlsÆŸ#ØoAÈ-1∞.ps'$è,, /=p—çJ$efO9ÌDzË7w&0ıprok>p&€ƒhSw0khw.£)'˘" ØOÏPµsıÚRD}eR=‚•Œ¯.‹F	Ñ2F·tcL~H{ccDX\Ù[ognamvzn<txÀNî‹XyÃlzo7	MKrxJÎ›O%pfbkagus\\zetµqtoMls\_dirlutjÏs\$cmdry'-L
+  "'P:ÕOD›tE'm5
+k(('qetupmoo3._uqstqqil{co{mand',-
+ ¢∞'CS\UsGrs˛xUsÒZ°r)\\A¯pD§ta\^mocÚ}\\“cogrgms÷»PynÎondPywËon331\{ibX<si¥e-p!qkagIs\›etÁptoæKs\!^di+Ïutals\`omhpndL‰__hÓitL.pqg,	"  'YMK¡ULev),Å  ,se“upto¢ls(dikUutils.comm!.d.Á‰ramîwo^9_cÁkpaiø,-Ù  /F:\‹Use\1\\’≥u√!rio|\App`at°\Lwb`D\\¿rOísi.sD¯Q4lÌf\Ã–zthl>ª]]¸I¶PıryryLR¿Âi1gaG\\sï¥ˆg?Vw|ﬂVf[À÷ypÈ≠süPDahMaÏd‹ú_f)AegvZnOJ´lp1T.g˚7$
+0 "wXœ¬’F›),
+c   seÚ∑pto{lsdistutoMs.commald.@Ïis|,.`  C:\‹Qser#\\]su√°rio‹|ApˇEat%|\L?:alX\Pr1ÁraÔp\\Xyth\\IthCé315,\LmJ\\rite!ac3qgeC^\seÙup~kol´’\_fIsti/il{\\cmmaá@\\≤ isE.py'/
+é  'p=MOXULEG!,*  (õet5tto'ds.Wdis∏óti,q.clmmaod.bl)stjnumn6,™j  £b:\Xuse0Ú\\]Ûu√âio\≈ApjDatÂ|\Lg£alPr{¶r·ıc\\q˘thc\\˙uthoæ311\Lmh\\{yte•racKOge—n\saÙupnmolS\\_'ÈsvRilsX\cÔ	maGo\\v¬isuduù .pÒ'-]É 0'RYMœDTL‰),§Õ  Ë/rÂ4=xufålÛh◊dÈìttY>3*%~mI[nD,DY;~_˙pf.,-
+£º 'À∫T]rAry\ZG√0√çziˆ\\A2∞Á`@q\LeceÌ‹NTrowSËbs\PstYn\MÎy|l.¶g91UtlÅ2¥\sk¥eo`˘‚La{ïoP\}HpWtv/o~œlﬂ¸m}%Ù°}qm\cm°ng2ƒp]~˙isv/rp%Ápy'Ï
+1# '—ÀMOñëLE9©,
+0 (7wet∑QtoÁÊs.~$isX5tiÏÛ.c/-ma`}.bQIld
+ 0 'Á∂\\Uerc›\UÚ%√°zqo\|§pp§!ta]YLocyl\6PromRamcU\PyDhoi|\Pytåen3]x\\D˜b\\≥it{)pa^+ages\\˜atuævooo¿\\¸pisp5ti%[\\cmmTid\JBui»&.p∏#,>  pYMwEULÕı),  l°sep}pt|mlsdiëtut®Ns.9omm	Ed.gSil$]cl{Ç',/   ¢$C:TtUsaus\^suÉ©rio\\AR∂Dav`\\Ôcalñ\PrgrRms\\Python\\Python311\\Lib\\site-packages\\setuptools\\_distutils\\command\\build_clib.py',
+   'PYMODULE'),
+  ('setuptools._distutils.command.build_ext',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_distutils\\command\\build_ext.py',
+   'PYMODULE'),
+  ('setuptools._distutils.command.build_py',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_distutils\\command\\build_py.py',
+   'PYMODULE'),
+  ('setuptools._distutils.command.build_scripts',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_distutils\\command\\build_scripts.py',
+   'PYMODULE'),
+  ('setuptools._distutils.command.check',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_distutils\\command\\check.py',
+   'PYMODULE'),
+  ('setuptools._distutils.command.clean',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_distutils\\command\\clean.py',
+   'PYMODULE'),
+  ('setuptools._distutils.command.config',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_distutils\\command\\config.py',
+   'PYMODULE'),
+  ('setuptools._distutils.command.install',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_distutils\\command\\install.py',
+   'PYMODULE'),
+  ('setuptools._distutils.command.install_data',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_distutils\\command\\install_data.py',
+   'PYMODULE'),
+  ('setuptools._distutils.command.install_egg_info',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_distutils\\command\\install_egg_info.py',
+   'PYMODULE'),
+  ('setuptools._distutils.command.install_headers',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_distutils\\command\\install_headers.py',
+   'PYMODULE'),
+  ('setuptools._distutils.command.install_lib',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_distutils\\command\\install_lib.py',
+   'PYMODULE'),
+  ('setuptools._distutils.command.install_scripts',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_distutils\\command\\install_scripts.py',
+   'PYMODULE'),
+  ('setuptools._distutils.command.py37compat',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_distutils\\command\\py37compat.py',
+   'PYMODULE'),
+  ('setuptools._distutils.command.register',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_distutils\\command\\register.py',
+   'PYMODULE'),
+  ('setuptools._distutils.command.sdist',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_distutils\\command\\sdist.py',
+   'PYMODULE'),
+  ('setuptools._distutils.command.upload',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_distutils\\command\\upload.py',
+   'PYMODULE'),
+  ('setuptools._distutils.config',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_distutils\\config.py',
+   'PYMODULE'),
+  ('setuptools._distutils.core',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_distutils\\core.py',
+   'PYMODULE'),
+  ('setuptools._distutils.cygwinccompiler',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_distutils\\cygwinccompiler.py',
+   'PYMODULE'),
+  ('setuptools._distutils.debug',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_distutils\\debug.py',
+   'PYMODULE'),
+  ('setuptools._distutils.dep_util',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_distutils\\dep_util.py',
+   'PYMODULE'),
+  ('setuptools._distutils.dir_util',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_distutils\\dir_util.py',
+   'PYMODULE'),
+  ('setuptools._distutils.dist',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_distutils\\dist.py',
+   'PYMODULE'),
+  ('setuptools._distutils.errors',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_distutils\\errors.py',
+   'PYMODULE'),
+  ('setuptools._distutils.extension',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_distutils\\extension.py',
+   'PYMODULE'),
+  ('setuptools._distutils.fancy_getopt',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_distutils\\fancy_getopt.py',
+   'PYMODULE'),
+  ('setuptools._distutils.file_util',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_distutils\\file_util.py',
+   'PYMODULE'),
+  ('setuptools._distutils.filelist',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_distutils\\filelist.py',
+   'PYMODULE'),
+  ('setuptools._distutils.log',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_distutils\\log.py',
+   'PYMODULE'),
+  ('setuptools._distutils.msvc9compiler',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_distutils\\msvc9compiler.py',
+   'PYMODULE'),
+  ('setuptools._distutils.msvccompiler',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_distutils\\msvccompiler.py',
+   'PYMODULE'),
+  ('setuptools._distutils.py38compat',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_distutils\\py38compat.py',
+   'PYMODULE'),
+  ('setuptools._distutils.py39compat',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_distutils\\py39compat.py',
+   'PYMODULE'),
+  ('setuptools._distutils.spawn',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_distutils\\spawn.py',
+   'PYMODULE'),
+  ('setuptools._distutils.sysconfig',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_distutils\\sysconfig.py',
+   'PYMODULE'),
+  ('setuptools._distutils.text_file',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_distutils\\text_file.py',
+   'PYMODULE'),
+  ('setuptools._distutils.unixccompiler',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_distutils\\unixccompiler.py',
+   'PYMODULE'),
+  ('setuptools._distutils.util',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_distutils\\util.py',
+   'PYMODULE'),
+  ('setuptools._distutils.version',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_distutils\\version.py',
+   'PYMODULE'),
+  ('setuptools._distutils.versionpredicate',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_distutils\\versionpredicate.py',
+   'PYMODULE'),
+  ('setuptools._entry_points',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_entry_points.py',
+   'PYMODULE'),
+  ('setuptools._imp',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_imp.py',
+   'PYMODULE'),
+  ('setuptools._importlib',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_importlib.py',
+   'PYMODULE'),
+  ('setuptools._itertools',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_itertools.py',
+   'PYMODULE'),
+  ('setuptools._normalization',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_normalization.py',
+   'PYMODULE'),
+  ('setuptools._path',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_path.py',
+   'PYMODULE'),
+  ('setuptools._reqs',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_reqs.py',
+   'PYMODULE'),
+  ('setuptools._vendor',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\__init__.py',
+   'PYMODULE'),
+  ('setuptools._vendor.importlib_metadata',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\importlib_metadata\\__init__.py',
+   'PYMODULE'),
+  ('setuptools._vendor.importlib_metadata._adapters',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\importlib_metadata\\_adapters.py',
+   'PYMODULE'),
+  ('setuptools._vendor.importlib_metadata._collections',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\importlib_metadata\\_collections.py',
+   'PYMODULE'),
+  ('setuptools._vendor.importlib_metadata._compat',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\importlib_metadata\\_compat.py',
+   'PYMODULE'),
+  ('setuptools._vendor.importlib_metadata._functools',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\importlib_metadata\\_functools.py',
+   'PYMODULE'),
+  ('setuptools._vendor.importlib_metadata._itertools',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\importlib_metadata\\_itertools.py',
+   'PYMODULE'),
+  ('setuptools._vendor.importlib_metadata._meta',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\importlib_metadata\\_meta.py',
+   'PYMODULE'),
+  ('setuptools._vendor.importlib_metadata._py39compat',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\importlib_metadata\\_py39compat.py',
+   'PYMODULE'),
+  ('setuptools._vendor.importlib_metadata._text',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\importlib_metadata\\_text.py',
+   'PYMODULE'),
+  ('setuptools._vendor.importlib_resources',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\importlib_resources\\__init__.py',
+   'PYMODULE'),
+  ('setuptools._vendor.importlib_resources._adapters',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\importlib_resources\\_adapters.py',
+   'PYMODULE'),
+  ('setuptools._vendor.importlib_resources._common',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\importlib_resources\\_common.py',
+   'PYMODULE'),
+  ('setuptools._vendor.importlib_resources._compat',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\importlib_resources\\_compat.py',
+   'PYMODULE'),
+  ('setuptools._vendor.importlib_resources._itertools',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\importlib_resources\\_itertools.py',
+   'PYMODULE'),
+  ('setuptools._vendor.importlib_resources._legacy',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\importlib_resources\\_legacy.py',
+   'PYMODULE'),
+  ('setuptools._vendor.importlib_resources.abc',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\importlib_resources\\abc.py',
+   'PYMODULE'),
+  ('setuptools._vendor.importlib_resources.readers',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\importlib_resources\\readers.py',
+   'PYMODULE'),
+  ('setuptools._vendor.importlib_resources.simple',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\importlib_resources\\simple.py',
+   'PYMODULE'),
+  ('setuptools._vendor.jaraco',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\jaraco\\__init__.py',
+   'PYMODULE'),
+  ('setuptools._vendor.jaraco.context',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\jaraco\\context.py',
+   'PYMODULE'),
+  ('setuptools._vendor.jaraco.functools',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\jaraco\\functools.py',
+   'PYMODULE'),
+  ('setuptools._vendor.jaraco.text',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\jaraco\\text\\__init__.py',
+   'PYMODULE'),
+  ('setuptools._vendor.more_itertools',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\more_itertools\\__init__.py',
+   'PYMODULE'),
+  ('setuptools._vendor.more_itertools.more',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\more_itertools\\more.py',
+   'PYMODULE'),
+  ('setuptools._vendor.more_itertools.recipes',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\more_itertools\\recipes.py',
+   'PYMODULE'),
+  ('setuptools._vendor.ordered_set',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\ordered_set.py',
+   'PYMODULE'),
+  ('setuptools._vendor.packaging',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\packaging\\__init__.py',
+   'PYMODULE'),
+  ('setuptools._vendor.packaging._elffile',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\packaging\\_elffile.py',
+   'PYMODULE'),
+  ('setuptools._vendor.packaging._manylinux',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\packaging\\_manylinux.py',
+   'PYMODULE'),
+  ('setuptools._vendor.packaging._musllinux',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\packaging\\_musllinux.py',
+   'PYMODULE'),
+  ('setuptools._vendor.packaging._parser',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\packaging\\_parser.py',
+   'PYMODULE'),
+  ('setuptools._vendor.packaging._structures',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\packaging\\_structures.py',
+   'PYMODULE'),
+  ('setuptools._vendor.packaging._tokenizer',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\packaging\\_tokenizer.py',
+   'PYMODULE'),
+  ('setuptools._vendor.packaging.markers',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\packaging\\markers.py',
+   'PYMODULE'),
+  ('setuptools._vendor.packaging.requirements',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\packaging\\requirements.py',
+   'PYMODULE'),
+  ('setuptools._vendor.packaging.specifiers',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\packaging\\specifiers.py',
+   'PYMODULE'),
+  ('setuptools._vendor.packaging.tags',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\packaging\\tags.py',
+   'PYMODULE'),
+  ('setuptools._vendor.packaging.utils',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\packaging\\utils.py',
+   'PYMODULE'),
+  ('setuptools._vendor.packaging.version',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\packaging\\version.py',
+   'PYMODULE'),
+  ('setuptools._vendor.tomli',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\tomli\\__init__.py',
+   'PYMODULE'),
+  ('setuptools._vendor.tomli._parser',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\tomli\\_parser.py',
+   'PYMODULE'),
+  ('setuptools._vendor.tomli._re',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\tomli\\_re.py',
+   'PYMODULE'),
+  ('setuptools._vendor.tomli._types',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\tomli\\_types.py',
+   'PYMODULE'),
+  ('setuptools._vendor.typing_extensions',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\typing_extensions.py',
+   'PYMODULE'),
+  ('setuptools._vendor.zipp',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\_vendor\\zipp.py',
+   'PYMODULE'),
+  ('setuptools.archive_util',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\archive_util.py',
+   'PYMODULE'),
+  ('setuptools.command',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\command\\__init__.py',
+   'PYMODULE'),
+  ('setuptools.command.bdist_egg',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\command\\bdist_egg.py',
+   'PYMODULE'),
+  ('setuptools.command.build',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\command\\build.py',
+   'PYMODULE'),
+  ('setuptools.command.egg_info',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\command\\egg_info.py',
+   'PYMODULE'),
+  ('setuptools.command.py36compat',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\command\\py36compat.py',
+   'PYMODULE'),
+  ('setuptools.command.sdist',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\command\\sdist.py',
+   'PYMODULE'),
+  ('setuptools.command.setopt',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\command\\setopt.py',
+   'PYMODULE'),
+  ('setuptools.config',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\config\\__init__.py',
+   'PYMODULE'),
+  ('setuptools.config._apply_pyprojecttoml',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\config\\_apply_pyprojecttoml.py',
+   'PYMODULE'),
+  ('setuptools.config._validate_pyproject',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\config\\_validate_pyproject\\__init__.py',
+   'PYMODULE'),
+  ('setuptools.config._validate_pyproject.error_reporting',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\config\\_validate_pyproject\\error_reporting.py',
+   'PYMODULE'),
+  ('setuptools.config._validate_pyproject.extra_validations',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\config\\_validate_pyproject\\extra_validations.py',
+   'PYMODULE'),
+  ('setuptools.config._validate_pyproject.fastjsonschema_exceptions',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\config\\_validate_pyproject\\fastjsonschema_exceptions.py',
+   'PYMODULE'),
+  ('setuptools.config._validate_pyproject.fastjsonschema_validations',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\config\\_validate_pyproject\\fastjsonschema_validations.py',
+   'PYMODULE'),
+  ('setuptools.config._validate_pyproject.formats',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\config\\_validate_pyproject\\formats.py',
+   'PYMODULE'),
+  ('setuptools.config.expand',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\config\\expand.py',
+   'PYMODULE'),
+  ('setuptools.config.pyprojecttoml',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\config\\pyprojecttoml.py',
+   'PYMODULE'),
+  ('setuptools.config.setupcfg',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\config\\setupcfg.py',
+   'PYMODULE'),
+  ('setuptools.depends',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\depends.py',
+   'PYMODULE'),
+  ('setuptools.discovery',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\discovery.py',
+   'PYMODULE'),
+  ('setuptools.dist',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\dist.py',
+   'PYMODULE'),
+  ('setuptools.errors',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\errors.py',
+   'PYMODULE'),
+  ('setuptools.extension',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\extension.py',
+   'PYMODULE'),
+  ('setuptools.extern',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\extern\\__init__.py',
+   'PYMODULE'),
+  ('setuptools.glob',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\glob.py',
+   'PYMODULE'),
+  ('setuptools.installer',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\installer.py',
+   'PYMODULE'),
+  ('setuptools.logging',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\logging.py',
+   'PYMODULE'),
+  ('setuptools.monkey',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\monkey.py',
+   'PYMODULE'),
+  ('setuptools.msvc',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\msvc.py',
+   'PYMODULE'),
+  ('setuptools.py34compat',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\py34compat.py',
+   'PYMODULE'),
+  ('setuptools.unicode_utils',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\unicode_utils.py',
+   'PYMODULE'),
+  ('setuptools.version',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\version.py',
+   'PYMODULE'),
+  ('setuptools.wheel',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\wheel.py',
+   'PYMODULE'),
+  ('setuptools.windows_support',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\setuptools\\windows_support.py',
+   'PYMODULE'),
+  ('shlex',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\shlex.py',
+   'PYMODULE'),
+  ('shutil',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\shutil.py',
+   'PYMODULE'),
+  ('signal',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\signal.py',
+   'PYMODULE'),
+  ('site',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site.py',
+   'PYMODULE'),
+  ('smartbd', 'E:\\Victor-TCC\\Victor-TCC\\codes\\smartbd.py', 'PYMODULE'),
+  ('socket',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\socket.py',
+   'PYMODULE'),
+  ('socketserver',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\socketserver.py',
+   'PYMODULE'),
+  ('software', 'E:\\Victor-TCC\\Victor-TCC\\codes\\software.py', 'PYMODULE'),
+  ('ssl',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\ssl.py',
+   'PYMODULE'),
+  ('statistics',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\statistics.py',
+   'PYMODULE'),
+  ('string',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\string.py',
+   'PYMODULE'),
+  ('stringprep',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\stringprep.py',
+   'PYMODULE'),
+  ('subprocess',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\subprocess.py',
+   'PYMODULE'),
+  ('sysconfig',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\sysconfig.py',
+   'PYMODULE'),
+  ('tarfile',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\tarfile.py',
+   'PYMODULE'),
+  ('tempfile',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\tempfile.py',
+   'PYMODULE'),
+  ('textwrap',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\textwrap.py',
+   'PYMODULE'),
+  ('threading',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\threading.py',
+   'PYMODULE'),
+  ('tkinter',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\tkinter\\__init__.py',
+   'PYMODULE'),
+  ('tkinter.commondialog',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\tkinter\\commondialog.py',
+   'PYMODULE'),
+  ('tkinter.constants',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\tkinter\\constants.py',
+   'PYMODULE'),
+  ('tkinter.dialog',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\tkinter\\dialog.py',
+   'PYMODULE'),
+  ('tkinter.filedialog',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\tkinter\\filedialog.py',
+   'PYMODULE'),
+  ('tkinter.font',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\tkinter\\font.py',
+   'PYMODULE'),
+  ('tkinter.messagebox',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\tkinter\\messagebox.py',
+   'PYMODULE'),
+  ('tkinter.simpledialog',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\tkinter\\simpledialog.py',
+   'PYMODULE'),
+  ('tkinter.ttk',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\tkinter\\ttk.py',
+   'PYMODULE'),
+  ('tracemalloc',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\tracemalloc.py',
+   'PYMODULE'),
+  ('tty',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\tty.py',
+   'PYMODULE'),
+  ('typing',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\typing.py',
+   'PYMODULE'),
+  ('unittest',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\unittest\\__init__.py',
+   'PYMODULE'),
+  ('unittest._log',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\unittest\\_log.py',
+   'PYMODULE'),
+  ('unittest.async_case',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\unittest\\async_case.py',
+   'PYMODULE'),
+  ('unittest.case',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\unittest\\case.py',
+   'PYMODULE'),
+  ('unittest.loader',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\unittest\\loader.py',
+   'PYMODULE'),
+  ('unittest.main',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\unittest\\main.py',
+   'PYMODULE'),
+  ('unittest.mock',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\unittest\\mock.py',
+   'PYMODULE'),
+  ('unittest.result',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\unittest\\result.py',
+   'PYMODULE'),
+  ('unittest.runner',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\unittest\\runner.py',
+   'PYMODULE'),
+  ('unittest.signals',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\unittest\\signals.py',
+   'PYMODULE'),
+  ('unittest.suite',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\unittest\\suite.py',
+   'PYMODULE'),
+  ('unittest.util',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\unittest\\util.py',
+   'PYMODULE'),
+  ('user', 'E:\\Victor-TCC\\Victor-TCC\\codes\\user.py', 'PYMODULE'),
+  ('uuid',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\uuid.py',
+   'PYMODULE'),
+  ('webbrowser',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\webbrowser.py',
+   'PYMODULE'),
+  ('win32con',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\win32\\lib\\win32con.py',
+   'PYMODULE'),
+  ('xml',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\xml\\__init__.py',
+   'PYMODULE'),
+  ('xml.parsers',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\xml\\parsers\\__init__.py',
+   'PYMODULE'),
+  ('xml.parsers.expat',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\xml\\parsers\\expat.py',
+   'PYMODULE'),
+  ('xml.sax',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\xml\\sax\\__init__.py',
+   'PYMODULE'),
+  ('xml.sax._exceptions',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\xml\\sax\\_exceptions.py',
+   'PYMODULE'),
+  ('xml.sax.expatreader',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\xml\\sax\\expatreader.py',
+   'PYMODULE'),
+  ('xml.sax.handler',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\xml\\sax\\handler.py',
+   'PYMODULE'),
+  ('xml.sax.saxutils',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\xml\\sax\\saxutils.py',
+   'PYMODULE'),
+  ('xml.sax.xmlreader',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\xml\\sax\\xmlreader.py',
+   'PYMODULE'),
+  ('xmlrpc',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\xmlrpc\\__init__.py',
+   'PYMODULE'),
+  ('xmlrpc.client',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\xmlrpc\\client.py',
+   'PYMODULE'),
+  ('zipfile',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\zipfile.py',
+   'PYMODULE'),
+  ('zipimport',
+   'C:\\Users\\Usu√°rio\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\zipimport.py',
+   'PYMODULE')])
