@@ -12,7 +12,6 @@ from smartbd import conect
 from customtkinter import CTk, CTkFont, CTkImage
 
 
-print("Oi teste")
 connection = conect() #Conectando com o banco de dados no arquivo smartbd.py
 cursor = connection.cursor()
 def get_username(email, senha): #Conecta com o Banco de Dados e puxa o Username do usuario 
